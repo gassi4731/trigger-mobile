@@ -4,6 +4,7 @@
 *.log
 *.pyc
 *.swp
+versions/
 .DS_Store
 .atom/
 .buildlog/
@@ -117,3 +118,16 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+
+# Remove the following pattern if you wish to check in your lock file
+pubspec.lock
+
+# FVM during tests
+.fvm/flutter_sdk
+.vscode/settings.json
+packages/cli/test/.test_coverage.dart
+packages/cli/.env
+.env
+node_modules
+test/.test_cov.dart
+test/support_assets/dart_package/lib/src/version.dart

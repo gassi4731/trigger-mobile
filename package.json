@@ -1,0 +1,24 @@
+{
+  "name": "trigger-mobile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:penguin4731/trigger-mobile.git",
+  "author": "Yo Higashida <y.higashida0226+app@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  },
+  "lint-staged": {
+    "*.dart": [
+      "fvm flutter format"
+    ],
+    "*.@(json|yaml)": [
+      "prettier --write"
+    ]
+  },
+  "scripts": {
+    "prepare": "husky install"
+  }
+}
