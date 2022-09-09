@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trigger/mock/recommended_overview_route.dart';
+import 'package:trigger/ui/component/overview_route.dart';
+import 'package:trigger/ui/theme/padding_size.dart';
 import '../../model/recommended_overview_route.dart';
 
 class SearchCurrentLocation extends StatefulWidget {
@@ -35,9 +37,11 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation> {
         child: ListView.builder(
           itemCount: routes.length,
           itemBuilder: (BuildContext context, index) {
-            return Container(
-              height: 80,
-              color: const Color.fromRGBO(10, 10, 10, 0.5),
+            return Column(
+              children: [
+                const SizedBox(height: PaddingSize.ps15),
+                OverviewRoute(route: routes[index]),
+              ],
             );
           },
         ),
