@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Address extends StatefulWidget {
-  const Address({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const Address({Key? key}) : super(key: key);
 
   @override
   State<Address> createState() => _AddressState();
@@ -19,7 +17,7 @@ class _AddressState extends State<Address> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('自宅の住所入力'),
       ),
       body: Column(
         children: <Widget>[
