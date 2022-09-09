@@ -40,7 +40,10 @@ class _OverviewRouteState extends State<OverviewRoute> {
 
   void startTimer() {
     const oneMin = Duration(seconds: 1);
-    timer = Timer.periodic(oneMin, (timer) => updateTimeLeft());
+
+    if (mounted) {
+      timer = Timer.periodic(oneMin, (timer) => updateTimeLeft());
+    }
   }
 
   void stopTimer() {
