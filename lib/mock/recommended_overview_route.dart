@@ -3,11 +3,16 @@ import 'dart:math';
 import 'package:trigger/model/recommended_overview_route.dart';
 
 List<RecommendedOverviewRoute> mockRecommendedOverviewRoute([int length = 1]) {
+  final now = DateTime.now();
+  final year = now.year;
+  final month = now.month;
+  final day = now.day;
+
   final mocks = [
     RecommendedOverviewRoute(
-      timeLimit: DateTime(2020, 10, 2, 12, 10),
+      timeLimit: DateTime(year, month, day + 1, 1, 10),
       isEnableTimeLimit: true,
-      amount: Random().nextInt(5000),
+      amount: Random().nextInt(500),
       allPoint: Random().nextDouble() * 100,
       physicalPoint: Random().nextDouble() * 100,
       isUseTrain: true,
@@ -24,7 +29,7 @@ List<RecommendedOverviewRoute> mockRecommendedOverviewRoute([int length = 1]) {
       isUseHotel: false,
     ),
     RecommendedOverviewRoute(
-      timeLimit: DateTime(2020, 10, 2, 15, 10),
+      timeLimit: DateTime(year, month, day, 16, 50),
       isEnableTimeLimit: true,
       amount: Random().nextInt(5000),
       allPoint: Random().nextDouble() * 100,
@@ -34,7 +39,7 @@ List<RecommendedOverviewRoute> mockRecommendedOverviewRoute([int length = 1]) {
       isUseHotel: false,
     ),
     RecommendedOverviewRoute(
-      timeLimit: DateTime(2020, 10, 2, 16, 10),
+      timeLimit: DateTime(year, month, day, 23, 10),
       isEnableTimeLimit: true,
       amount: Random().nextInt(5000),
       allPoint: Random().nextDouble() * 100,
