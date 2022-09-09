@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:trigger/model/recommended_overview_route.dart';
 
-RecommendedOverviewRoute mockRecommendedOverviewRoute([int length = 1]) {
+List<RecommendedOverviewRoute> mockRecommendedOverviewRoute([int length = 1]) {
   final mocks = [
     RecommendedOverviewRoute(
       timeLimit: DateTime(2020, 10, 2, 12, 10),
@@ -63,5 +63,5 @@ RecommendedOverviewRoute mockRecommendedOverviewRoute([int length = 1]) {
     ),
   ];
 
-  return mocks[0];
+  return mocks;
 }
