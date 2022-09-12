@@ -1,24 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
 import 'package:trigger/ui/theme/font_size.dart';
 import 'package:trigger/ui/theme/padding_size.dart';
 
 class SpotRoute extends StatefulWidget {
-  const SpotRoute({Key? key, this.beforeDetail, this.afterDetail})
-      : super(key: key);
+  const SpotRoute({
+    Key? key,
+    required this.detail,
+    this.afterDetail,
+    this.isFirst = false,
+    this.isLast = false,
+  }) : super(key: key);
 
-  final RecommendedRouteDetail? beforeDetail;
+  final RecommendedRouteDetail detail;
   final RecommendedRouteDetail? afterDetail;
+  final bool isFirst;
+  final bool isLast;
 
   @override
   State<SpotRoute> createState() => _SpotRouteState();
 }
 
 class _SpotRouteState extends State<SpotRoute> {
-  final beforeTime = '12:00';
-  final afterTime = '12:10';
-  final title = '渋谷駅';
+  String? beforeTime;
+  String? afterTime;
+  late String title;
   final timeTextStyle = const TextStyle(fontSize: FontSize.pt20);
+
+  @override
+  void initState() {
+    super.initState();
+    final outputFormat = DateFormat('HH:mm');
+    beforeTime = outputFormat.format(widget.detail.leaveAt!);
+    title = widget.detail.from;
+
+    if (widget.isFirst) {
+      // 最初のオブジェクトの場合
+      beforeTime = outputFormat.format(widget.detail.leaveAt!);
+      afterTime = null;
+      title = widget.detail.from;
+    } else if (widget.isLast) {
+      // 最後のオブジェクトの場合
+      beforeTime = outputFormat.format(widget.detail.arriveAt!);
+      afterTime = null;
+      title = widget.detail.to;
+    } else {
+      // 途中のオブジェクトの場合
+      beforeTime = outputFormat.format(widget.detail.arriveAt!);
+      afterTime = outputFormat.format(widget.afterDetail!.leaveAt!);
+      title = widget.detail.to;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +68,18 @@ class _SpotRouteState extends State<SpotRoute> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  beforeTime,
-                  style: timeTextStyle,
-                ),
-                Text(
-                  afterTime,
-                  style: timeTextStyle,
-                )
+                beforeTime != null
+                    ? Text(
+                        beforeTime!,
+                        style: timeTextStyle,
+                      )
+                    : const SizedBox(),
+                afterTime != null
+                    ? Text(
+                        afterTime!,
+                        style: timeTextStyle,
+                      )
+                    : const SizedBox()
               ],
             ),
           ),
