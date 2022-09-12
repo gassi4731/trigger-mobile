@@ -1,4 +1,3 @@
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/sort_mode.dart';
@@ -15,7 +14,7 @@ class SearchCurrentLocation extends StatefulWidget {
 
 class _SearchCurrentLocation extends State<SearchCurrentLocation>
     with SingleTickerProviderStateMixin {
-  final routes = <RecommendedOverviewRoute>[];
+  final routes = <RecommendedRoute>[];
   late SortMode sortMode;
   final sortModes = [
     SortMode(id: 0, iconData: Icons.directions_run, text: '体力優先'),
@@ -42,10 +41,9 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   }
 
   Future<void> fetchRecommendRoute() async {
-    setState(() {
-      // TODO: APIからおすすめのルートを取得する。
-      routes.addAll(mockRecommendedOverviewRoute());
-    });
+    // TODO: APIからおすすめのルートを取得する。
+    routes.addAll(await mockRecommendedRoutes());
+    setState(() {});
   }
 
   @override

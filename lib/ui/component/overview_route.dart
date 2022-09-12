@@ -8,7 +8,7 @@ import 'package:trigger/ui/theme/padding_size.dart';
 class OverviewRoute extends StatefulWidget {
   const OverviewRoute({Key? key, required this.route}) : super(key: key);
 
-  final RecommendedOverviewRoute route;
+  final RecommendedRoute route;
 
   @override
   State<OverviewRoute> createState() => _OverviewRouteState();
