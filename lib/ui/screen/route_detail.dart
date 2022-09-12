@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
 import 'package:trigger/ui/component/spot_route.dart';
+import 'package:trigger/ui/component/walk_route.dart';
 
 class RouteDetail extends StatefulWidget {
   const RouteDetail({Key? key}) : super(key: key);
@@ -33,14 +34,19 @@ class _RouteDetailState extends State<RouteDetail> {
       appBar: AppBar(title: const Text('ルートの詳細')),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            details.isNotEmpty
-                ? SpotRoute(
+          children: details.isNotEmpty
+              ? [
+                  SpotRoute(
+                    detail: details[0],
+                    isFirst: true,
+                  ),
+                  WalkRoute(detail: details[0]),
+                  SpotRoute(
                     detail: details[0],
                     afterDetail: details[1],
                   )
-                : const SizedBox()
-          ],
+                ]
+              : [],
         ),
       ),
     );
