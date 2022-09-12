@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:trigger/model/recommended_overview_route.dart';
+import 'package:trigger/model/recommended_route.dart';
 
 List<RecommendedOverviewRoute> mockRecommendedOverviewRoute([int length = 1]) {
   final now = DateTime.now();

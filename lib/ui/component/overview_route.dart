@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:trigger/model/recommended_overview_route.dart';
+import 'package:trigger/model/recommended_route.dart';
 import 'package:trigger/ui/component/use_route_facilities.dart';
 import 'package:trigger/ui/theme/font_size.dart';
 import 'package:trigger/ui/theme/padding_size.dart';
