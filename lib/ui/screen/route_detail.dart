@@ -3,8 +3,7 @@ import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
 import 'package:trigger/ui/component/hotel_route.dart';
 import 'package:trigger/ui/component/spot_route.dart';
-import 'package:trigger/ui/component/train_route.dart';
-import 'package:trigger/ui/component/walk_route.dart';
+import 'package:trigger/ui/component/transportation_route.dart';
 
 class RouteDetail extends StatefulWidget {
   const RouteDetail({Key? key}) : super(key: key);
@@ -32,30 +31,37 @@ class _RouteDetailState extends State<RouteDetail> {
   }
 
   void createRouteComponent() {
-    details.asMap().forEach((i, detail) {
-      if (i == 0) {
-        // 最初の場合
-        detailsComponents
-          ..add(SpotRoute(detail: detail, isFirst: true))
-          ..add(selectRouteWidget(detail))
-          ..add(SpotRoute(detail: detail, afterDetail: details[i + 1]));
-      } else if (i == details.length - 1) {
-        // 最後の場合
-        detailsComponents
-          ..add(selectRouteWidget(detail))
-          ..add(SpotRoute(detail: detail, isLast: true));
-      } else {
-        // それ以外の場合
-        detailsComponents
-          ..add(selectRouteWidget(detail))
-          ..add(
-            SpotRoute(
-              detail: detail,
-              afterDetail: details[i + 1],
-            ),
-          );
-      }
-    });
+    if (details.length == 1) {
+      detailsComponents
+        ..add(SpotRoute(detail: details[0], isFirst: true))
+        ..add(selectRouteWidget(details[0]))
+        ..add(SpotRoute(detail: details[0], isLast: true));
+    } else {
+      details.asMap().forEach((i, detail) {
+        if (i == 0) {
+          // 最初の場合
+          detailsComponents
+            ..add(SpotRoute(detail: detail, isFirst: true))
+            ..add(selectRouteWidget(detail))
+            ..add(SpotRoute(detail: detail, afterDetail: details[i + 1]));
+        } else if (i == details.length - 1) {
+          // 最後の場合
+          detailsComponents
+            ..add(selectRouteWidget(detail))
+            ..add(SpotRoute(detail: detail, isLast: true));
+        } else {
+          // それ以外の場合
+          detailsComponents
+            ..add(selectRouteWidget(detail))
+            ..add(
+              SpotRoute(
+                detail: detail,
+                afterDetail: details[i + 1],
+              ),
+            );
+        }
+      });
+    }
   }
 
   Widget selectRouteWidget(RecommendedRouteDetail detail) {
@@ -63,17 +69,12 @@ class _RouteDetailState extends State<RouteDetail> {
 
     switch (detail.method) {
       case 'walk':
-        widget = WalkRoute(detail: detail);
-        break;
       case 'train':
-        widget = TrainRoute(detail: detail);
+      case 'taxi':
+        widget = TransportationRoute(detail: detail);
         break;
       case 'hotel':
         widget = const HotelRoute();
-        break;
-      case 'taxi':
-        // TODO: TaxiRouteをつくる
-        widget = Container();
         break;
       default:
         widget = Container();
