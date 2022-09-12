@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
 import 'package:trigger/ui/component/spot_route.dart';
+import 'package:trigger/ui/component/train_route.dart';
 import 'package:trigger/ui/component/walk_route.dart';
 
 class RouteDetail extends StatefulWidget {
@@ -44,7 +45,8 @@ class _RouteDetailState extends State<RouteDetail> {
                   SpotRoute(
                     detail: details[0],
                     afterDetail: details[1],
-                  )
+                  ),
+                  TrainRoute(detail: details[1])
                 ]
               : [],
         ),
