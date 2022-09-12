@@ -66,36 +66,36 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
           },
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: FloatingActionBubble(
-        items: sortModes.map((e) {
-          return Bubble(
-            icon: e.iconData,
-            iconColor: Colors.white,
-            title: e.text,
-            titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-            bubbleColor: Colors.black,
-            onPress: () {
-              animationController.reverse();
-            },
-          );
-        }).toList(),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      // floatingActionButton: FloatingActionBubble(
+      //   items: sortModes.map((e) {
+      //     return Bubble(
+      //       icon: e.iconData,
+      //       iconColor: Colors.white,
+      //       title: e.text,
+      //       titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+      //       bubbleColor: Colors.black,
+      //       onPress: () {
+      //         animationController.reverse();
+      //       },
+      //     );
+      //   }).toList(),
 
-        // animation controller
-        animation: animation,
+      //   // animation controller
+      //   animation: animation,
 
-        // On pressed change animation state
-        onPress: () => animationController.isCompleted
-            ? animationController.reverse()
-            : animationController.forward(),
+      //   // On pressed change animation state
+      //   onPress: () => animationController.isCompleted
+      //       ? animationController.reverse()
+      //       : animationController.forward(),
 
-        // Floating Action button Icon color
-        iconColor: Theme.of(context).primaryColor,
+      //   // Floating Action button Icon color
+      //   iconColor: Theme.of(context).primaryColor,
 
-        // Flaoting Action button Icon
-        iconData: Icons.sort,
-        backGroundColor: Colors.white,
-      ),
+      //   // Flaoting Action button Icon
+      //   iconData: Icons.sort,
+      //   backGroundColor: Colors.white,
+      // ),
     );
   }
 }
