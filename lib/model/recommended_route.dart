@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
+import 'package:trigger/util/extension_string.dart';
 
 class RecommendedRoute {
   RecommendedRoute({
@@ -13,6 +14,28 @@ class RecommendedRoute {
     required this.isUseHotel,
     required this.details,
   });
+
+  factory RecommendedRoute.fromJson(Map<dynamic, dynamic> json) {
+    DateTime? timeLimit;
+    if (json['time_limit'] != null && json['time_limit'] != '') {
+      timeLimit = DateTime.parse(json['time_limit'].toString());
+    } else {
+      timeLimit = null;
+    }
+
+    return RecommendedRoute(
+      timeLimit: timeLimit,
+      isEnableTimeLimit: timeLimit != null,
+      price: int.parse(json['price'].toString()),
+      allPoint: double.parse(json['all_point'].toString()),
+      physicalPoint: double.parse(json['physical_point'].toString()),
+      isUseTrain: (json['is_use_train'].toString()).parseBool(),
+      isUseTaxi: (json['is_use_taxi'].toString()).parseBool(),
+      isUseHotel: (json['is_use_hotel'].toString()).parseBool(),
+      details: [],
+    );
+  }
+
   final DateTime? timeLimit;
   final bool isEnableTimeLimit;
   final int price;
