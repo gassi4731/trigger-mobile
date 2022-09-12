@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:trigger/model/recommended_route.dart';
+import 'package:trigger/model/recommended_route_detail.dart';
 
 Future<List<RecommendedRoute>> mockRecommendedRoutes() async {
   final converted = <RecommendedRoute>[];
@@ -16,4 +17,10 @@ Future<List<RecommendedRoute>> mockRecommendedRoutes() async {
   }
 
   return converted;
+}
+
+Future<List<RecommendedRouteDetail>> mockRecommendedRouteDetails() async {
+  final routes = await mockRecommendedRoutes();
+  final route = routes[0];
+  return route.details;
 }
