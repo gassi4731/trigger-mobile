@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
+import 'package:trigger/ui/component/hotel_route.dart';
 import 'package:trigger/ui/component/spot_route.dart';
 import 'package:trigger/ui/component/train_route.dart';
 import 'package:trigger/ui/component/walk_route.dart';
@@ -17,6 +18,7 @@ class RouteDetail extends StatefulWidget {
 
 class _RouteDetailState extends State<RouteDetail> {
   final details = <RecommendedRouteDetail>[];
+  final detailsComponents = <Widget>[];
 
   @override
   void initState() {
@@ -26,7 +28,57 @@ class _RouteDetailState extends State<RouteDetail> {
 
   Future<void> fetchMockDetail() async {
     details.addAll(await mockRecommendedRouteDetails());
-    setState(() {});
+    setState(createRouteComponent);
+  }
+
+  void createRouteComponent() {
+    details.asMap().forEach((i, detail) {
+      if (i == 0) {
+        // 最初の場合
+        detailsComponents
+          ..add(SpotRoute(detail: detail, isFirst: true))
+          ..add(selectRouteWidget(detail))
+          ..add(SpotRoute(detail: detail, afterDetail: details[i + 1]));
+      } else if (i == details.length - 1) {
+        // 最後の場合
+        detailsComponents
+          ..add(selectRouteWidget(detail))
+          ..add(SpotRoute(detail: detail, isLast: true));
+      } else {
+        // それ以外の場合
+        detailsComponents
+          ..add(selectRouteWidget(detail))
+          ..add(
+            SpotRoute(
+              detail: detail,
+              afterDetail: details[i + 1],
+            ),
+          );
+      }
+    });
+  }
+
+  Widget selectRouteWidget(RecommendedRouteDetail detail) {
+    late Widget widget;
+
+    switch (detail.method) {
+      case 'walk':
+        widget = WalkRoute(detail: detail);
+        break;
+      case 'train':
+        widget = TrainRoute(detail: detail);
+        break;
+      case 'hotel':
+        widget = const HotelRoute();
+        break;
+      case 'taxi':
+        // TODO: TaxiRouteをつくる
+        widget = Container();
+        break;
+      default:
+        widget = Container();
+    }
+    return widget;
   }
 
   @override
@@ -35,20 +87,7 @@ class _RouteDetailState extends State<RouteDetail> {
       appBar: AppBar(title: const Text('ルートの詳細')),
       body: SingleChildScrollView(
         child: Column(
-          children: details.isNotEmpty
-              ? [
-                  SpotRoute(
-                    detail: details[0],
-                    isFirst: true,
-                  ),
-                  WalkRoute(detail: details[0]),
-                  SpotRoute(
-                    detail: details[0],
-                    afterDetail: details[1],
-                  ),
-                  TrainRoute(detail: details[1])
-                ]
-              : [],
+          children: detailsComponents,
         ),
       ),
     );
