@@ -39,7 +39,7 @@ class RecommendedRoute {
       isUseTrain: (json['is_use_train'].toString()).parseBool(),
       isUseTaxi: (json['is_use_taxi'].toString()).parseBool(),
       isUseHotel: (json['is_use_hotel'].toString()).parseBool(),
-      details: [],
+      details: details,
     );
   }
 
