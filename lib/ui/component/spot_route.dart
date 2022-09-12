@@ -31,25 +31,32 @@ class _SpotRouteState extends State<SpotRoute> {
   @override
   void initState() {
     super.initState();
-    final outputFormat = DateFormat('HH:mm');
-    beforeTime = outputFormat.format(widget.detail.leaveAt!);
     title = widget.detail.from;
 
     if (widget.isFirst) {
       // 最初のオブジェクトの場合
-      beforeTime = outputFormat.format(widget.detail.leaveAt!);
+      beforeTime = formatDateTime(widget.detail.leaveAt);
       afterTime = null;
       title = widget.detail.from;
     } else if (widget.isLast) {
       // 最後のオブジェクトの場合
-      beforeTime = outputFormat.format(widget.detail.arriveAt!);
+      beforeTime = formatDateTime(widget.detail.arriveAt);
       afterTime = null;
       title = widget.detail.to;
     } else {
       // 途中のオブジェクトの場合
-      beforeTime = outputFormat.format(widget.detail.arriveAt!);
-      afterTime = outputFormat.format(widget.afterDetail!.leaveAt!);
+      beforeTime = formatDateTime(widget.detail.arriveAt);
+      afterTime = formatDateTime(widget.afterDetail!.leaveAt);
       title = widget.detail.to;
+    }
+  }
+
+  String formatDateTime(DateTime? dateTime) {
+    final outputFormat = DateFormat('HH:mm');
+    if (dateTime != null) {
+      return outputFormat.format(dateTime);
+    } else {
+      return '';
     }
   }
 
