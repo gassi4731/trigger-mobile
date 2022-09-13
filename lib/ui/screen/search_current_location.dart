@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/sort_mode.dart';
 import 'package:trigger/ui/component/overview_route.dart';
+import 'package:trigger/ui/screen/route_detail.dart';
 import 'package:trigger/ui/theme/padding_size.dart';
 import '../../model/recommended_route.dart';
 
@@ -58,7 +59,16 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
             return Column(
               children: [
                 const SizedBox(height: PaddingSize.ps15),
-                OverviewRoute(route: routes[index]),
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push<MaterialPageRoute>(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return RouteDetail(details: routes[index].details);
+                      },
+                    ),
+                  ),
+                  child: OverviewRoute(route: routes[index]),
+                )
               ],
             );
           },
