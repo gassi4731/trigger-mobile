@@ -118,9 +118,9 @@
       {
         "name": "品川東武ホテル",
         "next_action": {
-          "method": "",
+          "method": "walk",
           "price": 0,
-          "required_minute": 0,
+          "required_minute": 8,
           "train": {
             "line": "",
             "direction": "",
@@ -134,9 +134,9 @@
       {
         "name": "品川駅",
         "next_action": {
-          "method": "",
-          "price": 0,
-          "required_minute": 0,
+          "method": "train",
+          "price": 400,
+          "required_minute": 26,
           "train": {
             "line": "横須賀線",
             "direction": "大船行き",
