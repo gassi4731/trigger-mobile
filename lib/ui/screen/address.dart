@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trigger/ui/screen/search_current_location.dart';
 import 'package:trigger/ui/theme/padding_size.dart';
 
@@ -51,11 +52,18 @@ class _AddressState extends State<Address> {
     addressFocusNode.requestFocus();
   }
 
-  void tapRegister() {
+  Future<void> tapRegister() async {
     if (zipCodeController.text != '' &&
         zipCodeController.text.length == 7 &&
         addressController.text != '') {
-      Navigator.of(context).pushReplacement<dynamic, dynamic>(
+      // 値を保存
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isRegisteredAddress', true);
+      await prefs.setString('zipCode', zipCodeController.text);
+      await prefs.setString('address', addressController.text);
+
+      // 画面遷移
+      await Navigator.of(context).pushReplacement<dynamic, dynamic>(
         MaterialPageRoute<dynamic>(
           settings: const RouteSettings(name: '/detail'),
           builder: (context) {
