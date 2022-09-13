@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
-import 'package:trigger/mock/recommended_overview_route.dart';
+import 'package:http/http.dart' as http;
 import 'package:trigger/model/sort_mode.dart';
+import 'package:trigger/support_file/api.dart';
 import 'package:trigger/support_file/sort.dart';
 import 'package:trigger/ui/component/overview_route.dart';
 import 'package:trigger/ui/screen/route_detail.dart';
@@ -48,14 +51,21 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   Future<void> fetchRecommendRoute() async {
     // 現在地の情報を取得
     final position = await determinePosition();
-    final longitude = position.longitude;
-    final latitude = position.latitude;
-    print('[position] $longitude $latitude');
 
-    // TODO: APIからおすすめのルートを取得する。
-    routes
-      ..removeRange(0, routes.length)
-      ..addAll(await mockRecommendedRoutes());
+    // TODO: リクエストに合わせる
+    final response = await http.get(
+      Uri.https(
+        APIUrls.authority,
+        APIUrls.fetchRoutes,
+      ),
+    );
+    final jsonResponse = jsonDecode(response.body) as List<dynamic>;
+    final jsonResponseMap =
+        jsonResponse.map((dynamic e) => e as Map<dynamic, dynamic>);
+
+    for (final i in jsonResponseMap) {
+      routes.add(RecommendedRoute.fromJson(i));
+    }
     sort();
     setState(() {});
   }
