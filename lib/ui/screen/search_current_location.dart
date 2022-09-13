@@ -1,9 +1,9 @@
+import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/sort_mode.dart';
 import 'package:trigger/ui/component/overview_route.dart';
 import 'package:trigger/ui/screen/route_detail.dart';
-import 'package:trigger/ui/theme/padding_size.dart';
 import '../../model/recommended_route.dart';
 import '../../util/position.dart';
 
@@ -79,36 +79,36 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
           },
         ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      // floatingActionButton: FloatingActionBubble(
-      //   items: sortModes.map((e) {
-      //     return Bubble(
-      //       icon: e.iconData,
-      //       iconColor: Colors.white,
-      //       title: e.text,
-      //       titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-      //       bubbleColor: Colors.black,
-      //       onPress: () {
-      //         animationController.reverse();
-      //       },
-      //     );
-      //   }).toList(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: FloatingActionBubble(
+        items: sortModes.map((e) {
+          return Bubble(
+            icon: e.iconData,
+            iconColor: Colors.white,
+            title: e.text,
+            titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+            bubbleColor: Colors.black,
+            onPress: () {
+              animationController.reverse();
+            },
+          );
+        }).toList(),
 
-      //   // animation controller
-      //   animation: animation,
+        // animation controller
+        animation: animation,
 
-      //   // On pressed change animation state
-      //   onPress: () => animationController.isCompleted
-      //       ? animationController.reverse()
-      //       : animationController.forward(),
+        // On pressed change animation state
+        onPress: () => animationController.isCompleted
+            ? animationController.reverse()
+            : animationController.forward(),
 
-      //   // Floating Action button Icon color
-      //   iconColor: Theme.of(context).primaryColor,
+        // Floating Action button Icon color
+        iconColor: Theme.of(context).primaryColor,
 
-      //   // Flaoting Action button Icon
-      //   iconData: Icons.sort,
-      //   backGroundColor: Colors.white,
-      // ),
+        // Flaoting Action button Icon
+        iconData: Icons.sort,
+        backGroundColor: Colors.white,
+      ),
     );
   }
 }
