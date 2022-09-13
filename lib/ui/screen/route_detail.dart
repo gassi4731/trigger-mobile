@@ -5,10 +5,9 @@ import 'package:trigger/ui/component/spot_route.dart';
 import 'package:trigger/ui/component/transportation_route.dart';
 
 class RouteDetail extends StatefulWidget {
-  const RouteDetail({Key? key}) : super(key: key);
-  // const RouteDetail({Key? key, required this.detail}) : super(key: key);
+  const RouteDetail({Key? key, required this.details}) : super(key: key);
 
-  // final RecommendedRouteDetail detail;
+  final List<RecommendedRouteDetail> details;
 
   @override
   State<RouteDetail> createState() => _RouteDetailState();
@@ -21,12 +20,9 @@ class _RouteDetailState extends State<RouteDetail> {
   @override
   void initState() {
     super.initState();
-    fetchMockDetail();
-  }
 
-  Future<void> fetchMockDetail() async {
-    details.addAll(await mockRecommendedRouteDetails());
-    setState(createRouteComponent);
+    details.addAll(widget.details);
+    createRouteComponent();
   }
 
   void createRouteComponent() {
