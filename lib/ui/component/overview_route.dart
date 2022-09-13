@@ -83,9 +83,9 @@ class _OverviewRouteState extends State<OverviewRoute> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        right: PaddingSize.ps15,
-        left: PaddingSize.ps15,
-      ),
+          right: PaddingSize.ps15,
+          left: PaddingSize.ps15,
+          top: PaddingSize.ps15),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.white,
