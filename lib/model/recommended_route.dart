@@ -1,7 +1,7 @@
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
-import 'package:trigger/util/extension_string.dart';
+import 'package:trigger/support_file/extension_string.dart';
 
 class RecommendedRoute {
   RecommendedRoute({
