@@ -16,6 +16,7 @@ class TransportationRoute extends StatefulWidget {
 class _TransportationRouteState extends State<TransportationRoute> {
   late String title;
   late String description;
+  late String price;
 
   @override
   void initState() {
@@ -39,17 +40,20 @@ class _TransportationRouteState extends State<TransportationRoute> {
     title = widget.nextAction.train.line;
     description =
         '${widget.nextAction.train.direction} ${widget.nextAction.train.track}';
+    price = widget.nextAction.price.toString();
   }
 
   void walkRoute() {
     title = '徒歩${widget.nextAction.requiredMinute}分';
     description = '';
+    price = '';
   }
 
   void taxiRoute() {
     title = 'タクシー';
     description =
         '所要時間:${widget.nextAction.requiredMinute}分 目安の費用:¥${widget.nextAction.price}';
+    price = '';
   }
 
   @override
@@ -62,27 +66,30 @@ class _TransportationRouteState extends State<TransportationRoute> {
       child: Row(
         children: [
           const SizedBox(width: 70),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: PaddingSize.ps15,
-              bottom: PaddingSize.ps15,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: PaddingSize.ps15,
+                bottom: PaddingSize.ps15,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(fontSize: FontSize.pt18),
+                  ),
+                  description != ''
+                      ? Text(
+                          description,
+                          style: const TextStyle(fontSize: FontSize.pt12),
+                        )
+                      : const SizedBox()
+                ],
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: FontSize.pt18),
-                ),
-                description != ''
-                    ? Text(
-                        description,
-                        style: const TextStyle(fontSize: FontSize.pt12),
-                      )
-                    : const SizedBox()
-              ],
-            ),
-          )
+          ),
+          price != '' ? Text(price) : const SizedBox(),
         ],
       ),
     );
