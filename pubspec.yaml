@@ -17,7 +17,7 @@ dependencies:
   pedantic_mono: ^1.18.0
   intl: ^0.17.0
   floating_action_bubble: ^1.1.4
-  geolocator: ^5.3.2+2
+  geolocator: ^9.0.1
   geocoding: ^2.0.5
 
 dev_dependencies:
