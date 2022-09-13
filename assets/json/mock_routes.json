@@ -68,7 +68,7 @@
             "track": ""
           }
         },
-        "arrive_at": null,
+        "arrive_at": "2022-09-09T23:59:00Z",
         "leave_at": null,
         "price": 0
       }
