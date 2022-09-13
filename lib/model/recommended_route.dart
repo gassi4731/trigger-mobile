@@ -23,6 +23,13 @@ class RecommendedRoute {
       timeLimit = null;
     }
 
+    final rawDetails = json['details'] as List<dynamic>;
+    final details = <RecommendedRouteDetail>[];
+    for (final item in rawDetails) {
+      details
+          .add(RecommendedRouteDetail.fromJson(item as Map<dynamic, dynamic>));
+    }
+
     return RecommendedRoute(
       timeLimit: timeLimit,
       isEnableTimeLimit: timeLimit != null,
@@ -32,7 +39,7 @@ class RecommendedRoute {
       isUseTrain: (json['is_use_train'].toString()).parseBool(),
       isUseTaxi: (json['is_use_taxi'].toString()).parseBool(),
       isUseHotel: (json['is_use_hotel'].toString()).parseBool(),
-      details: [],
+      details: details,
     );
   }
 

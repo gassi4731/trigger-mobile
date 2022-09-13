@@ -9,46 +9,68 @@
     "is_use_hotel": false,
     "details": [
       {
-        "from": "現在地",
-        "to": "渋谷駅",
+        "name": "現在地",
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 8,
+          "train": {
+            "line": "",
+            "direction": "",
+            "track": ""
+          }
+        },
+        "arrive_at": null,
         "leave_at": "2022-09-09T23:30:00Z",
+        "price": 0
+      },
+      {
+        "name": "渋谷駅",
+        "next_action": {
+          "method": "train",
+          "price": 600,
+          "required_minute": 18,
+          "train": {
+            "line": "山手線",
+            "direction": "品川・東京方面（内回り）",
+            "track": "2番線"
+          }
+        },
         "arrive_at": "2022-09-09T23:38:00Z",
-        "required_minute": 8,
-        "price": 0,
-        "method": "walk",
-        "train": {
-          "line": "",
-          "direction": "",
-          "track": -1
-        }
-      },
-      {
-        "from": "渋谷駅",
-        "to": "品川駅",
         "leave_at": "2022-09-09T23:38:00Z",
-        "arrive_at": "2022-09-09T23:56:00Z",
-        "required_minute": 18,
-        "price": 600,
-        "method": "train",
-        "train": {
-          "line": "山手線",
-          "direction": "品川・東京方面（内回り）",
-          "track": 2
-        }
+        "price": 0
       },
       {
-        "from": "品川駅",
-        "to": "保土ヶ谷駅",
+        "name": "品川駅",
+        "next_action": {
+          "method": "train",
+          "price": 400,
+          "required_minute": 0,
+          "train": {
+            "line": "横須賀線",
+            "direction": "大船行き",
+            "track": "14番線"
+          }
+        },
+        "arrive_at": "2022-09-09T23:56:00Z",
         "leave_at": "2022-09-09T23:59:00Z",
-        "arrive_at": "2022-09-10T00:26:00Z",
-        "required_minute": 27,
-        "price": 400,
-        "method": "train",
-        "train": {
-          "line": "横須賀線",
-          "direction": "大船行き",
-          "track": 14
-        }
+        "price": 0
+      },
+      {
+        "name": "保土ヶ谷駅",
+        "next_action": {
+          "method": "",
+          "price": 0,
+          "required_minute": 0,
+          "train": {
+            "line": "",
+            "direction": "",
+            "track": ""
+          }
+        },
+        "arrive_at": "2022-09-09T23:59:00Z",
+        "leave_at": null,
+        "price": 0
       }
     ]
   },
@@ -62,74 +84,84 @@
     "is_use_hotel": true,
     "details": [
       {
-        "from": "渋谷駅",
-        "to": "品川駅",
+        "name": "渋谷駅",
+        "next_action": {
+          "method": "train",
+          "price": 600,
+          "required_minute": 0,
+          "train": {
+            "line": "山手線",
+            "direction": "品川・東京方面（内回り）",
+            "track": "2番線"
+          }
+        },
+        "arrive_at": null,
         "leave_at": "2022-09-09T23:38:00Z",
+        "price": 0
+      },
+      {
+        "name": "品川駅",
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 8,
+          "train": {
+            "line": "",
+            "direction": "",
+            "track": ""
+          }
+        },
         "arrive_at": "2022-09-09T23:56:00Z",
-        "required_minute": 18,
-        "price": 600,
-        "method": "train",
-        "train": {
-          "line": "山手線",
-          "direction": "品川・東京方面（内回り）",
-          "track": 2
-        }
-      },
-      {
-        "from": "品川駅",
-        "to": "品川東武ホテル",
         "leave_at": "2022-09-09T23:56:00Z",
-        "arrive_at": "2022-09-10T00:04:00Z",
-        "required_minute": 8,
-        "price": 0,
-        "method": "walk",
-        "train": {
-          "line": "",
-          "direction": "",
-          "track": -1
-        }
+        "price": 0
       },
       {
-        "from": "品川東武ホテル",
-        "to": "品川東武ホテル",
-        "leave_at": "2022-09-10T00:04:00Z",
+        "name": "品川東武ホテル",
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 8,
+          "train": {
+            "line": "",
+            "direction": "",
+            "track": ""
+          }
+        },
         "arrive_at": "2022-09-10T00:04:00Z",
-        "required_minute": -1,
-        "price": 6700,
-        "method": "hotel",
-        "train": {
-          "line": "",
-          "direction": "",
-          "track": -1
-        }
-      },
-      {
-        "from": "品川東武ホテル",
-        "to": "品川駅",
         "leave_at": "2022-09-10T08:20:00Z",
-        "arrive_at": "2022-09-10T08:28:00Z",
-        "required_minute": 8,
-        "price": 0,
-        "method": "walk",
-        "train": {
-          "line": "",
-          "direction": "",
-          "track": -1
-        }
+        "price": 6700
       },
       {
-        "from": "品川駅",
-        "to": "保土ヶ谷駅",
+        "name": "品川駅",
+        "next_action": {
+          "method": "train",
+          "price": 400,
+          "required_minute": 26,
+          "train": {
+            "line": "横須賀線",
+            "direction": "大船行き",
+            "track": "15番線"
+          }
+        },
+        "arrive_at": "2022-09-10T08:28:00Z",
         "leave_at": "2022-09-10T08:28:00Z",
+        "price": 0
+      },
+      {
+        "name": "保土ヶ谷駅",
+        "next_action": {
+          "method": "",
+          "price": 0,
+          "required_minute": 0,
+          "train": {
+            "line": "",
+            "direction": "",
+            "track": ""
+          }
+        },
         "arrive_at": "2022-09-10T08:54:00Z",
-        "required_minute": 26,
-        "price": 400,
-        "method": "train",
-        "train": {
-          "line": "横須賀線",
-          "direction": "大船行き",
-          "track": 15
-        }
+        "leave_at": null,
+        "price": 0
       }
     ]
   },
@@ -143,18 +175,36 @@
     "is_use_hotel": false,
     "details": [
       {
-        "from": "現在地",
-        "to": "保土ヶ谷駅",
-        "leave_at": "",
-        "arrive_at": "",
-        "required_minute": 46,
-        "price": 15000,
-        "method": "taxi",
-        "train": {
-          "line": "",
-          "direction": "",
-          "track": -1
-        }
+        "name": "現在地",
+        "next_action": {
+          "method": "taxi",
+          "price": 15000,
+          "required_minute": 46,
+          "train": {
+            "line": "",
+            "direction": "",
+            "track": ""
+          }
+        },
+        "arrive_at": null,
+        "leave_at": null,
+        "price": 0
+      },
+      {
+        "name": "保土ヶ谷駅",
+        "next_action": {
+          "method": "",
+          "price": 0,
+          "required_minute": 0,
+          "train": {
+            "line": "",
+            "direction": "",
+            "track": ""
+          }
+        },
+        "arrive_at": null,
+        "leave_at": null,
+        "price": 0
       }
     ]
   }
