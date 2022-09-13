@@ -5,6 +5,7 @@ import 'package:trigger/ui/component/overview_route.dart';
 import 'package:trigger/ui/screen/route_detail.dart';
 import 'package:trigger/ui/theme/padding_size.dart';
 import '../../model/recommended_route.dart';
+import '../../util/position.dart';
 
 class SearchCurrentLocation extends StatefulWidget {
   const SearchCurrentLocation({Key? key}) : super(key: key);
@@ -28,6 +29,8 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
 
   @override
   void initState() {
+    super.initState();
+
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 260),
@@ -38,12 +41,19 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
     fetchRecommendRoute();
-    super.initState();
   }
 
   Future<void> fetchRecommendRoute() async {
+    // 現在地の情報を取得
+    final position = await determinePosition();
+    final longitude = position.longitude;
+    final latitude = position.latitude;
+    print('[position] $longitude $latitude');
+
     // TODO: APIからおすすめのルートを取得する。
-    routes.addAll(await mockRecommendedRoutes());
+    routes
+      ..removeRange(0, routes.length)
+      ..addAll(await mockRecommendedRoutes());
     setState(() {});
   }
 
