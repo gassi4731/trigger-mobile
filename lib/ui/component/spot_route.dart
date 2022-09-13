@@ -8,55 +8,33 @@ class SpotRoute extends StatefulWidget {
   const SpotRoute({
     Key? key,
     required this.detail,
-    this.afterDetail,
-    this.isFirst = false,
-    this.isLast = false,
   }) : super(key: key);
 
   final RecommendedRouteDetail detail;
-  final RecommendedRouteDetail? afterDetail;
-  final bool isFirst;
-  final bool isLast;
 
   @override
   State<SpotRoute> createState() => _SpotRouteState();
 }
 
 class _SpotRouteState extends State<SpotRoute> {
-  String? beforeTime;
-  String? afterTime;
+  String? arriveTime;
+  String? leaveTime;
   late String title;
   final timeTextStyle = const TextStyle(fontSize: FontSize.pt20);
 
   @override
   void initState() {
     super.initState();
-    title = widget.detail.from;
 
-    if (widget.isFirst) {
-      // 最初のオブジェクトの場合
-      beforeTime = formatDateTime(widget.detail.leaveAt);
-      afterTime = null;
-      title = widget.detail.from;
-    } else if (widget.isLast) {
-      // 最後のオブジェクトの場合
-      beforeTime = formatDateTime(widget.detail.arriveAt);
-      afterTime = null;
-      title = widget.detail.to;
-    } else {
-      // 途中のオブジェクトの場合
-      beforeTime = formatDateTime(widget.detail.arriveAt);
-      afterTime = formatDateTime(widget.afterDetail!.leaveAt);
-      title = widget.detail.to;
-    }
-  }
-
-  String formatDateTime(DateTime? dateTime) {
     final outputFormat = DateFormat('HH:mm');
-    if (dateTime != null) {
-      return outputFormat.format(dateTime);
-    } else {
-      return '';
+    title = widget.detail.name;
+
+    if (widget.detail.arriveAt != null) {
+      arriveTime = outputFormat.format(widget.detail.arriveAt!);
+    }
+
+    if (widget.detail.leaveAt != null) {
+      leaveTime = outputFormat.format(widget.detail.leaveAt!);
     }
   }
 
@@ -70,28 +48,31 @@ class _SpotRouteState extends State<SpotRoute> {
       color: Colors.grey[200],
       child: Row(
         children: [
-          SizedBox(
-            width: 70,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                beforeTime != null
-                    ? Text(
-                        beforeTime!,
-                        style: timeTextStyle,
-                      )
-                    : const SizedBox(),
-                afterTime != null
-                    ? Text(
-                        afterTime!,
-                        style: timeTextStyle,
-                      )
-                    : const SizedBox()
-              ],
-            ),
-          ),
+          arriveTime != null || leaveTime != null
+              ? SizedBox(
+                  width: 55,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      arriveTime != null
+                          ? Text(
+                              arriveTime!,
+                              style: timeTextStyle,
+                            )
+                          : const SizedBox(),
+                      leaveTime != null
+                          ? Text(
+                              leaveTime!,
+                              style: timeTextStyle,
+                            )
+                          : const SizedBox()
+                    ],
+                  ),
+                )
+              : const SizedBox(),
           Padding(
             padding: const EdgeInsets.only(
+              left: PaddingSize.ps15,
               top: PaddingSize.ps15,
               bottom: PaddingSize.ps15,
             ),

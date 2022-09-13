@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:trigger/model/recommended_route_detail.dart';
+import 'package:trigger/model/recommended_route_next_action.dart';
 import 'package:trigger/ui/theme/font_size.dart';
 import 'package:trigger/ui/theme/padding_size.dart';
 
 class TransportationRoute extends StatefulWidget {
-  const TransportationRoute({Key? key, required this.detail}) : super(key: key);
+  const TransportationRoute({Key? key, required this.nextAction})
+      : super(key: key);
 
-  final RecommendedRouteDetail detail;
+  final RecommendedRouteNextAction nextAction;
 
   @override
   State<TransportationRoute> createState() => _TransportationRouteState();
@@ -20,7 +21,7 @@ class _TransportationRouteState extends State<TransportationRoute> {
   void initState() {
     super.initState();
 
-    switch (widget.detail.method) {
+    switch (widget.nextAction.method) {
       case 'train':
         trainRoute();
         break;
@@ -35,20 +36,20 @@ class _TransportationRouteState extends State<TransportationRoute> {
   }
 
   void trainRoute() {
-    title = widget.detail.train.line;
+    title = widget.nextAction.train.line;
     description =
-        '${widget.detail.train.direction} ${widget.detail.train.track}番線発';
+        '${widget.nextAction.train.direction} ${widget.nextAction.train.track}';
   }
 
   void walkRoute() {
-    title = '徒歩${widget.detail.requiredMinute}分';
+    title = '徒歩${widget.nextAction.requiredMinute}分';
     description = '';
   }
 
   void taxiRoute() {
     title = 'タクシー';
     description =
-        '所要時間:${widget.detail.requiredMinute}分 目安の費用:¥${widget.detail.price}';
+        '所要時間:${widget.nextAction.requiredMinute}分 目安の費用:¥${widget.nextAction.price}';
   }
 
   @override
