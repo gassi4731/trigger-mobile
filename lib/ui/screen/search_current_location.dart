@@ -4,6 +4,7 @@ import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/sort_mode.dart';
 import 'package:trigger/ui/component/overview_route.dart';
 import 'package:trigger/ui/screen/route_detail.dart';
+import 'package:trigger/util/sort.dart';
 import '../../model/recommended_route.dart';
 import '../../util/position.dart';
 
@@ -16,12 +17,12 @@ class SearchCurrentLocation extends StatefulWidget {
 
 class _SearchCurrentLocation extends State<SearchCurrentLocation>
     with SingleTickerProviderStateMixin {
-  final routes = <RecommendedRoute>[];
-  late SortMode sortMode;
+  List<RecommendedRoute> routes = <RecommendedRoute>[];
+  late int sortModeId = 2;
   final sortModes = [
-    SortMode(id: 0, iconData: Icons.directions_run, text: '体力優先'),
-    SortMode(id: 1, iconData: Icons.attach_money, text: '金額優先'),
-    SortMode(id: 2, iconData: Icons.timer_rounded, text: '時間優先'),
+    SortMode(id: 0, iconData: Icons.directions_run, text: '体力を優先'),
+    SortMode(id: 1, iconData: Icons.attach_money, text: '金額が安い'),
+    SortMode(id: 2, iconData: Icons.timer_rounded, text: '早く帰る'),
   ];
 
   late Animation<double> animation;
@@ -54,6 +55,23 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     routes
       ..removeRange(0, routes.length)
       ..addAll(await mockRecommendedRoutes());
+    sort();
+    setState(() {});
+  }
+
+  void sort() {
+    switch (sortModeId) {
+      case 0:
+        routes = sortRouteByPhysical(routes);
+        break;
+      case 1:
+        routes = sortRouteByPrice(routes);
+        break;
+      case 2:
+        routes = sortRouteByTime(routes);
+        break;
+      default:
+    }
     setState(() {});
   }
 
@@ -89,6 +107,8 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
             titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
             bubbleColor: Colors.black,
             onPress: () {
+              sortModeId = e.id;
+              sort();
               animationController.reverse();
             },
           );
