@@ -66,20 +66,15 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
         child: ListView.builder(
           itemCount: routes.length,
           itemBuilder: (BuildContext context, index) {
-            return Column(
-              children: [
-                const SizedBox(height: PaddingSize.ps15),
-                GestureDetector(
-                  onTap: () => Navigator.of(context).push<MaterialPageRoute>(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return RouteDetail(details: routes[index].details);
-                      },
-                    ),
-                  ),
-                  child: OverviewRoute(route: routes[index]),
-                )
-              ],
+            return GestureDetector(
+              onTap: () => Navigator.of(context).push<MaterialPageRoute>(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return RouteDetail(details: routes[index].details);
+                  },
+                ),
+              ),
+              child: OverviewRoute(route: routes[index]),
             );
           },
         ),
