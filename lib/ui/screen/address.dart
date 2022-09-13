@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:trigger/ui/screen/search_current_location.dart';
 import 'package:trigger/ui/theme/padding_size.dart';
 
 class Address extends StatefulWidget {
@@ -12,11 +13,6 @@ class Address extends StatefulWidget {
 }
 
 class _AddressState extends State<Address> {
-  String postCode = '';
-  String prefecture = '';
-  String city = '';
-  String address = '';
-
   late TextEditingController zipCodeController;
   late TextEditingController addressController;
   late FocusNode zipCodeFocusNode;
@@ -40,6 +36,34 @@ class _AddressState extends State<Address> {
     addressFocusNode.dispose();
 
     super.dispose();
+  }
+
+  Future<void> tapSearchAddress() async {
+    final result = await get(
+      Uri.parse(
+        'https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipCodeController.text}',
+      ),
+    );
+    final map = jsonDecode(result.body)['results'][0] as Map<dynamic, dynamic>;
+    addressController.text =
+        '${map['address1']}${map['address2']}${map['address3']}';
+
+    addressFocusNode.requestFocus();
+  }
+
+  void tapRegister() {
+    if (zipCodeController.text != '' &&
+        zipCodeController.text.length == 7 &&
+        addressController.text != '') {
+      Navigator.of(context).pushReplacement<dynamic, dynamic>(
+        MaterialPageRoute<dynamic>(
+          settings: const RouteSettings(name: '/detail'),
+          builder: (context) {
+            return const SearchCurrentLocation();
+          },
+        ),
+      );
+    }
   }
 
   @override
@@ -79,17 +103,7 @@ class _AddressState extends State<Address> {
                 ),
                 TextButton(
                   onPressed: () async {
-                    final result = await get(
-                      Uri.parse(
-                        'https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipCodeController.text}',
-                      ),
-                    );
-                    final map = jsonDecode(result.body)['results'][0]
-                        as Map<dynamic, dynamic>;
-                    addressController.text =
-                        '${map['address1']}${map['address2']}${map['address3']}';
-
-                    addressFocusNode.requestFocus();
+                    await tapSearchAddress();
                   },
                   child: const Text('住所を検索'),
                 )
@@ -102,10 +116,14 @@ class _AddressState extends State<Address> {
                 labelText: '都道府県+以降の住所',
               ),
             ),
-            ElevatedButton(
-              child: const Text('登録する'),
-              onPressed: () {},
-            ),
+            const SizedBox(height: PaddingSize.ps15),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: tapRegister,
+                child: const Text('登録する'),
+              ),
+            )
           ],
         ),
       ),
