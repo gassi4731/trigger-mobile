@@ -17,6 +17,8 @@ class OverviewRoute extends StatefulWidget {
 class _OverviewRouteState extends State<OverviewRoute> {
   late Timer timer;
 
+  bool isShowRoute = true;
+
   String timeLeft = ''; // 残り時間
   String unit = ''; // 残り時間の単位
   bool isShowDepartureTime = true;
@@ -42,7 +44,10 @@ class _OverviewRouteState extends State<OverviewRoute> {
     const oneMin = Duration(seconds: 1);
 
     if (mounted) {
-      timer = Timer.periodic(oneMin, (timer) => updateTimeLeft());
+      timer = Timer.periodic(oneMin, (timer) {
+        checkShowRoute();
+        updateTimeLeft();
+      });
     }
   }
 
@@ -51,7 +56,7 @@ class _OverviewRouteState extends State<OverviewRoute> {
   }
 
   void updateTimeLeft() {
-    if (widget.route.isEnableTimeLimit && widget.route.timeLimit != null) {
+    if (widget.route.isEnableTimeLimit) {
       final now = DateTime.now();
       final diff = widget.route.timeLimit!.difference(now);
 
@@ -79,135 +84,151 @@ class _OverviewRouteState extends State<OverviewRoute> {
     }
   }
 
+  void checkShowRoute() {
+    if (widget.route.isEnableTimeLimit) {
+      final now = DateTime.now();
+      final diff = widget.route.timeLimit!.difference(now);
+      if (diff.inMilliseconds < 0) {
+        setState(() {
+          isShowRoute = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-          right: PaddingSize.ps15,
-          left: PaddingSize.ps15,
-          top: PaddingSize.ps15),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              spreadRadius: 5,
-              blurRadius: 9,
-              offset: Offset(3, 6),
-            )
-          ],
-        ),
-        child: Column(
-          children: [
-            // 帰宅情報
-            Padding(
-              padding: const EdgeInsets.all(PaddingSize.ps15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return isShowRoute
+        ? Padding(
+            padding: const EdgeInsets.only(
+              right: PaddingSize.ps15,
+              left: PaddingSize.ps15,
+              top: PaddingSize.ps15,
+            ),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    spreadRadius: 5,
+                    blurRadius: 9,
+                    offset: Offset(3, 6),
+                  )
+                ],
+              ),
+              child: Column(
                 children: [
-                  // 出発まで〇〇分
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('出発まで'),
-                      const SizedBox(height: 12),
-                      Text.rich(
-                        TextSpan(
+                  // 帰宅情報
+                  Padding(
+                    padding: const EdgeInsets.all(PaddingSize.ps15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // 出発まで〇〇分
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextSpan(
-                              text: timeLeft,
-                              style: const TextStyle(
-                                fontSize: FontSize.pt60,
-                                fontWeight: FontWeight.w600,
-                                height: 0.8,
+                            const Text('出発まで'),
+                            const SizedBox(height: 12),
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: timeLeft,
+                                    style: const TextStyle(
+                                      fontSize: FontSize.pt60,
+                                      fontWeight: FontWeight.w600,
+                                      height: 0.8,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: unit,
+                                    style: const TextStyle(
+                                      fontSize: FontSize.pt20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            TextSpan(
-                              text: unit,
-                              style: const TextStyle(
-                                fontSize: FontSize.pt20,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            isShowDepartureTime
+                                ? Text(
+                                    '出発時間: ${widget.route.getTimeLimit()}',
+                                    style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  )
+                                : const SizedBox(),
+                          ],
+                        ),
+                        // 経路上でなにをつかうか
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            UseRouteFacilities(
+                              icon: Icons.train_outlined,
+                              isUse: widget.route.isUseTrain,
+                            ),
+                            const SizedBox(width: PaddingSize.ps15),
+                            UseRouteFacilities(
+                              icon: Icons.local_taxi_outlined,
+                              isUse: widget.route.isUseTaxi,
+                            ),
+                            const SizedBox(width: PaddingSize.ps15),
+                            UseRouteFacilities(
+                              icon: Icons.hotel_outlined,
+                              isUse: widget.route.isUseHotel,
                             ),
                           ],
                         ),
-                      ),
-                      isShowDepartureTime
-                          ? Text(
-                              '出発時間: ${widget.route.getTimeLimit()}',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            )
-                          : const SizedBox(),
-                    ],
+                      ],
+                    ),
                   ),
-                  // 経路上でなにをつかうか
+                  // 波線
+                  LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      final dashedCount =
+                          (constraints.maxWidth / (2 * dashedWidth)).floor();
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(dashedCount, (_) {
+                          return Container(
+                            width: dashedWidth,
+                            height: dashedHeight,
+                            color: color,
+                          );
+                        }),
+                      );
+                    },
+                  ),
+                  // 料金
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      UseRouteFacilities(
-                        icon: Icons.train_outlined,
-                        isUse: widget.route.isUseTrain,
+                      Container(
+                        padding: const EdgeInsets.only(left: PaddingSize.ps15),
+                        child: const Text('料金'),
                       ),
-                      const SizedBox(width: PaddingSize.ps15),
-                      UseRouteFacilities(
-                        icon: Icons.local_taxi_outlined,
-                        isUse: widget.route.isUseTaxi,
-                      ),
-                      const SizedBox(width: PaddingSize.ps15),
-                      UseRouteFacilities(
-                        icon: Icons.hotel_outlined,
-                        isUse: widget.route.isUseHotel,
-                      ),
+                      Container(
+                        padding: const EdgeInsets.only(
+                          right: PaddingSize.ps15,
+                          top: PaddingSize.ps15,
+                          bottom: PaddingSize.ps15,
+                        ),
+                        child: Text(
+                          widget.route.getAmount(),
+                          style: const TextStyle(fontSize: FontSize.pt20),
+                        ),
+                      )
                     ],
-                  ),
+                  )
                 ],
               ),
             ),
-            // 波線
-            LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                final dashedCount =
-                    (constraints.maxWidth / (2 * dashedWidth)).floor();
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(dashedCount, (_) {
-                    return Container(
-                      width: dashedWidth,
-                      height: dashedHeight,
-                      color: color,
-                    );
-                  }),
-                );
-              },
-            ),
-            // 料金
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(left: PaddingSize.ps15),
-                  child: const Text('料金'),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(
-                    right: PaddingSize.ps15,
-                    top: PaddingSize.ps15,
-                    bottom: PaddingSize.ps15,
-                  ),
-                  child: Text(
-                    widget.route.getAmount(),
-                    style: const TextStyle(fontSize: FontSize.pt20),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+          )
+        : const SizedBox();
   }
 }
