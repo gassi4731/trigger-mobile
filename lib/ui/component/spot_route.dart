@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
 import 'package:trigger/ui/theme/font_size.dart';
@@ -26,6 +27,7 @@ class _SpotRouteState extends State<SpotRoute> {
   void initState() {
     super.initState();
 
+    initializeDateFormatting('ja_JP');
     final outputFormat = DateFormat('HH:mm');
     title = widget.detail.name;
 
@@ -50,7 +52,7 @@ class _SpotRouteState extends State<SpotRoute> {
         children: [
           arriveTime != null || leaveTime != null
               ? SizedBox(
-                  width: 55,
+                  width: 60,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

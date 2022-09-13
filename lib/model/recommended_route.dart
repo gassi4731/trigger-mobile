@@ -1,3 +1,4 @@
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
 import 'package:trigger/util/extension_string.dart';
@@ -18,7 +19,7 @@ class RecommendedRoute {
   factory RecommendedRoute.fromJson(Map<dynamic, dynamic> json) {
     DateTime? timeLimit;
     if (json['time_limit'] != null && json['time_limit'] != '') {
-      timeLimit = DateTime.parse(json['time_limit'].toString());
+      timeLimit = DateTime.parse(json['time_limit'].toString()).toLocal();
     } else {
       timeLimit = null;
     }
@@ -55,6 +56,7 @@ class RecommendedRoute {
 
   String getTimeLimit() {
     if (isEnableTimeLimit && timeLimit != null) {
+      initializeDateFormatting('ja');
       final formatter = DateFormat('HH:mm');
       return formatter.format(timeLimit!);
     } else {

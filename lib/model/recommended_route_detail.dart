@@ -11,10 +11,10 @@ class RecommendedRouteDetail {
 
   factory RecommendedRouteDetail.fromJson(Map<dynamic, dynamic> json) {
     final leaveAt = json['leave_at'] != null
-        ? DateTime.parse(json['leave_at'].toString())
+        ? DateTime.parse(json['leave_at'].toString()).toLocal()
         : null;
     final arriveAt = json['arrive_at'] != null
-        ? DateTime.parse(json['arrive_at'].toString())
+        ? DateTime.parse(json['arrive_at'].toString()).toLocal()
         : null;
 
     return RecommendedRouteDetail(
