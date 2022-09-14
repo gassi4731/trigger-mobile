@@ -117,7 +117,12 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(appBarTitle)),
+      appBar: AppBar(
+        title: Text(
+          appBarTitle,
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
       body: RefreshIndicator(
         onRefresh: fetchRecommendRoute,
         child: ListView.builder(

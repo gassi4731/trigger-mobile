@@ -78,7 +78,10 @@ class _AddressState extends State<Address> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('自宅の住所入力'),
+        title: const Text(
+          '自宅の住所入力',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(PaddingSize.ps15),

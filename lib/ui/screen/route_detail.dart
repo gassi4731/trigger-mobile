@@ -42,7 +42,12 @@ class _RouteDetailState extends State<RouteDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('ルートの詳細')),
+      appBar: AppBar(
+        title: const Text(
+          'ルートの詳細',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: detailsComponents,
