@@ -63,6 +63,7 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     final jsonResponseMap =
         jsonResponse.map((dynamic e) => e as Map<dynamic, dynamic>);
 
+    routes = [];
     for (final i in jsonResponseMap) {
       routes.add(RecommendedRoute.fromJson(i));
     }

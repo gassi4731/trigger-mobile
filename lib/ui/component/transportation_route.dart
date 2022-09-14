@@ -40,7 +40,7 @@ class _TransportationRouteState extends State<TransportationRoute> {
     title = widget.nextAction.train.line;
     description =
         '${widget.nextAction.train.direction} ${widget.nextAction.train.track}';
-    price = widget.nextAction.price.toString();
+    price = widget.nextAction.getPrice();
   }
 
   void walkRoute() {
@@ -52,7 +52,7 @@ class _TransportationRouteState extends State<TransportationRoute> {
   void taxiRoute() {
     title = 'タクシー';
     description =
-        '所要時間:${widget.nextAction.requiredMinute}分 目安の費用:¥${widget.nextAction.price}';
+        '所要時間:${widget.nextAction.requiredMinute}分 目安の費用:${widget.nextAction.getPrice()}';
     price = '';
   }
 

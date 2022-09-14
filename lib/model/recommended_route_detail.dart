@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:trigger/model/recommended_route_next_action.dart';
 
 class RecommendedRouteDetail {
@@ -33,4 +34,9 @@ class RecommendedRouteDetail {
   final DateTime? arriveAt;
   final DateTime? leaveAt;
   final int price;
+
+  String getPrice() {
+    final formatter = NumberFormat('#,###');
+    return '￥${formatter.format(price)}';
+  }
 }
