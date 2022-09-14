@@ -21,6 +21,7 @@ class _OverviewRouteState extends State<OverviewRoute> {
 
   String timeLeft = ''; // 残り時間
   String unit = ''; // 残り時間の単位
+  String description = ''; // 概要
   bool isShowDepartureTime = true;
 
   final double dashedWidth = 5; // 破線単体の幅
@@ -164,25 +165,31 @@ class _OverviewRouteState extends State<OverviewRoute> {
                           ],
                         ),
                         // 経路上でなにをつかうか
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Column(
                           children: [
-                            UseRouteFacilities(
-                              icon: Icons.train_outlined,
-                              isUse: widget.route.isUseTrain,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                UseRouteFacilities(
+                                  icon: Icons.train_outlined,
+                                  isUse: widget.route.isUseTrain,
+                                ),
+                                const SizedBox(width: PaddingSize.ps15),
+                                UseRouteFacilities(
+                                  icon: Icons.local_taxi_outlined,
+                                  isUse: widget.route.isUseTaxi,
+                                ),
+                                const SizedBox(width: PaddingSize.ps15),
+                                UseRouteFacilities(
+                                  icon: Icons.hotel_outlined,
+                                  isUse: widget.route.isUseHotel,
+                                ),
+                              ],
                             ),
-                            const SizedBox(width: PaddingSize.ps15),
-                            UseRouteFacilities(
-                              icon: Icons.local_taxi_outlined,
-                              isUse: widget.route.isUseTaxi,
-                            ),
-                            const SizedBox(width: PaddingSize.ps15),
-                            UseRouteFacilities(
-                              icon: Icons.hotel_outlined,
-                              isUse: widget.route.isUseHotel,
-                            ),
+                            const SizedBox(height: 10),
+                            Text(description),
                           ],
-                        ),
+                        )
                       ],
                     ),
                   ),

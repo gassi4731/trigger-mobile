@@ -21,6 +21,7 @@ class _SpotRouteState extends State<SpotRoute> {
   String? arriveTime;
   String? leaveTime;
   late String title;
+  late String price;
   final timeTextStyle = const TextStyle(fontSize: FontSize.pt20);
 
   @override
@@ -37,6 +38,12 @@ class _SpotRouteState extends State<SpotRoute> {
 
     if (widget.detail.leaveAt != null) {
       leaveTime = outputFormat.format(widget.detail.leaveAt!);
+    }
+
+    if (widget.detail.placeGenre == 'hotel') {
+      price = widget.detail.getPrice();
+    } else {
+      price = '';
     }
   }
 
@@ -78,12 +85,18 @@ class _SpotRouteState extends State<SpotRoute> {
               top: PaddingSize.ps15,
               bottom: PaddingSize.ps15,
             ),
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontSize: FontSize.pt24,
-                fontWeight: FontWeight.w600,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: FontSize.pt24,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                price.isNotEmpty ? Text(price) : const SizedBox()
+              ],
             ),
           )
         ],

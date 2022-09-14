@@ -8,6 +8,7 @@ class RecommendedRouteDetail {
     this.arriveAt,
     this.leaveAt,
     required this.price,
+    required this.placeGenre,
   });
 
   factory RecommendedRouteDetail.fromJson(Map<dynamic, dynamic> json) {
@@ -26,6 +27,7 @@ class RecommendedRouteDetail {
       arriveAt: arriveAt,
       leaveAt: leaveAt,
       price: int.parse(json['price'].toString()),
+      placeGenre: json['place_genre'].toString(),
     );
   }
 
@@ -34,6 +36,7 @@ class RecommendedRouteDetail {
   final DateTime? arriveAt;
   final DateTime? leaveAt;
   final int price;
+  final String placeGenre;
 
   String getPrice() {
     final formatter = NumberFormat('#,###');

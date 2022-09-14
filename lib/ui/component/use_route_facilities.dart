@@ -10,21 +10,10 @@ class UseRouteFacilities extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = isUse ? Colors.black87 : Colors.black26;
 
-    return Column(
-      children: [
-        Icon(
-          icon,
-          size: 40,
-          color: color,
-        ),
-        Text(
-          isUse ? '○' : '×',
-          style: TextStyle(
-            fontSize: 25,
-            color: color,
-          ),
-        )
-      ],
+    return Icon(
+      icon,
+      size: 40,
+      color: color,
     );
   }
 }
