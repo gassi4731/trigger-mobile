@@ -29,8 +29,26 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     SortMode(id: 2, iconData: Icons.timer_rounded, text: '早く帰る'),
   ];
 
+  // 共通
+  late String emptyErrorMessage;
+  late String appBarTitle;
+
+  // floatingActionButton
   late Animation<double> animation;
   late AnimationController animationController;
+
+  // bottomNavigationBar
+  int selectedIndex = 0;
+  List<BottomNavigationBarItem> bottomNavigationBarItems = [
+    const BottomNavigationBarItem(icon: Icon(Icons.location_on), label: '現在地'),
+    const BottomNavigationBarItem(icon: Icon(Icons.search), label: '探す')
+  ];
+  void onBottomNavigationBarTap(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+    switchSearchMode();
+  }
 
   @override
   void initState() {
@@ -46,20 +64,30 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
     fetchRecommendRoute();
+    switchSearchMode();
   }
 
   Future<void> fetchRecommendRoute() async {
-    // 現在地の情報を取得
-    final position = await determinePosition();
+    late dynamic response;
 
-    // TODO: リクエストに合わせる
-    final response = await http.get(
-      Uri.https(
-        APIUrls.authority,
-        APIUrls.fetchRoutes,
-      ),
-    );
-    final jsonResponse = jsonDecode(response.body) as List<dynamic>;
+    switch (selectedIndex) {
+      case 0:
+        // 現在地の情報を取得
+        final position = await determinePosition();
+
+        response = await http.get(
+          Uri.https(
+            APIUrls.authority,
+            APIUrls.fetchRoutes,
+          ),
+        );
+        break;
+      case 1:
+        break;
+      default:
+    }
+
+    final jsonResponse = jsonDecode(response.body.toString()) as List<dynamic>;
     final jsonResponseMap =
         jsonResponse.map((dynamic e) => e as Map<dynamic, dynamic>);
 
@@ -67,20 +95,19 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     for (final i in jsonResponseMap) {
       routes.add(RecommendedRoute.fromJson(i));
     }
-    sort();
+    routes = sort(routes, sortModeId);
     setState(() {});
   }
 
-  void sort() {
-    switch (sortModeId) {
+  void switchSearchMode() {
+    switch (selectedIndex) {
       case 0:
-        routes = sortRouteByPhysical(routes);
+        emptyErrorMessage = '下に引っ張って家に帰るルートを検索しましょう!';
+        appBarTitle = '現在地から帰る';
         break;
       case 1:
-        routes = sortRouteByPrice(routes);
-        break;
-      case 2:
-        routes = sortRouteByTime(routes);
+        emptyErrorMessage = '今から向かう居酒屋を検索しましょう!';
+        appBarTitle = '帰る道を探す';
         break;
       default:
     }
@@ -90,7 +117,7 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('現在地から帰る')),
+      appBar: AppBar(title: Text(appBarTitle)),
       body: RefreshIndicator(
         onRefresh: fetchRecommendRoute,
         child: ListView.builder(
@@ -120,7 +147,9 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
             bubbleColor: Colors.black,
             onPress: () {
               sortModeId = e.id;
-              sort();
+              setState(() {
+                routes = sort(routes, sortModeId);
+              });
               animationController.reverse();
             },
           );
@@ -140,6 +169,11 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
         // Flaoting Action button Icon
         iconData: Icons.sort,
         backGroundColor: Colors.white,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: onBottomNavigationBarTap,
+        items: bottomNavigationBarItems,
       ),
     );
   }
