@@ -67,23 +67,7 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     for (final i in jsonResponseMap) {
       routes.add(RecommendedRoute.fromJson(i));
     }
-    sort();
-    setState(() {});
-  }
-
-  void sort() {
-    switch (sortModeId) {
-      case 0:
-        routes = sortRouteByPhysical(routes);
-        break;
-      case 1:
-        routes = sortRouteByPrice(routes);
-        break;
-      case 2:
-        routes = sortRouteByTime(routes);
-        break;
-      default:
-    }
+    routes = sort(routes, sortModeId);
     setState(() {});
   }
 
@@ -120,7 +104,9 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
             bubbleColor: Colors.black,
             onPress: () {
               sortModeId = e.id;
-              sort();
+              setState(() {
+                routes = sort(routes, sortModeId);
+              });
               animationController.reverse();
             },
           );

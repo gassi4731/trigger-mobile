@@ -1,5 +1,22 @@
 import 'package:trigger/model/recommended_route.dart';
 
+List<RecommendedRoute> sort(List<RecommendedRoute> routes, int id) {
+  var sortedRoutes = <RecommendedRoute>[];
+  switch (id) {
+    case 0:
+      sortedRoutes = sortRouteByPhysical(routes);
+      break;
+    case 1:
+      sortedRoutes = sortRouteByPrice(routes);
+      break;
+    case 2:
+      sortedRoutes = sortRouteByTime(routes);
+      break;
+    default:
+  }
+  return sortedRoutes;
+}
+
 List<RecommendedRoute> sortRouteByTime(List<RecommendedRoute> routes) {
   routes.sort((a, b) {
     final aTimeLimit = a.timeLimit;
