@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:trigger/mock/recommended_overview_route.dart';
+import 'package:trigger/model/recommended_route.dart';
 import 'package:trigger/model/recommended_route_detail.dart';
 import 'package:trigger/ui/component/spot_route.dart';
 import 'package:trigger/ui/component/transportation_route.dart';
 
 class RouteDetail extends StatefulWidget {
-  const RouteDetail({Key? key, required this.details}) : super(key: key);
+  const RouteDetail({Key? key, required this.route}) : super(key: key);
 
-  final List<RecommendedRouteDetail> details;
+  final RecommendedRoute route;
 
   @override
   State<RouteDetail> createState() => _RouteDetailState();
@@ -21,7 +22,7 @@ class _RouteDetailState extends State<RouteDetail> {
   void initState() {
     super.initState();
 
-    details.addAll(widget.details);
+    details.addAll(widget.route.details);
     createRouteComponent();
   }
 
@@ -43,9 +44,9 @@ class _RouteDetailState extends State<RouteDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'ルートの詳細',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          widget.route.description,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(

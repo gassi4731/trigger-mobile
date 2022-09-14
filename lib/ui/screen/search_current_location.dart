@@ -132,7 +132,7 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
               onTap: () => Navigator.of(context).push<MaterialPageRoute>(
                 MaterialPageRoute(
                   builder: (context) {
-                    return RouteDetail(details: routes[index].details);
+                    return RouteDetail(route: routes[index]);
                   },
                 ),
               ),
