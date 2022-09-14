@@ -65,7 +65,7 @@ class _TransportationRouteState extends State<TransportationRoute> {
       ),
       child: Row(
         children: [
-          const SizedBox(width: 70),
+          const SizedBox(width: 75),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(
