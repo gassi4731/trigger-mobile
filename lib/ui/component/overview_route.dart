@@ -21,7 +21,6 @@ class _OverviewRouteState extends State<OverviewRoute> {
 
   String timeLeft = ''; // 残り時間
   String unit = ''; // 残り時間の単位
-  String description = ''; // 概要
   bool isShowDepartureTime = true;
 
   final double dashedWidth = 5; // 破線単体の幅
@@ -187,7 +186,7 @@ class _OverviewRouteState extends State<OverviewRoute> {
                               ],
                             ),
                             const SizedBox(height: 10),
-                            Text(description),
+                            Text(widget.route.description),
                           ],
                         )
                       ],

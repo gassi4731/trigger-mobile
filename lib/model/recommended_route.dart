@@ -14,6 +14,7 @@ class RecommendedRoute {
     required this.isUseTaxi,
     required this.isUseHotel,
     required this.details,
+    required this.description,
   });
 
   factory RecommendedRoute.fromJson(Map<dynamic, dynamic> json) {
@@ -41,6 +42,7 @@ class RecommendedRoute {
       isUseTaxi: (json['is_use_taxi'].toString()).parseBool(),
       isUseHotel: (json['is_use_hotel'].toString()).parseBool(),
       details: details,
+      description: json['description'].toString(),
     );
   }
 
@@ -53,6 +55,7 @@ class RecommendedRoute {
   final bool isUseTaxi;
   final bool isUseHotel;
   final List<RecommendedRouteDetail> details;
+  final String description;
 
   String getTimeLimit() {
     if (isEnableTimeLimit && timeLimit != null) {
