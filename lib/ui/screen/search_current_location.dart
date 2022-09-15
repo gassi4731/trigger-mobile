@@ -182,12 +182,19 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     await _requestPermissions();
 
     for (final route in routes) {
-      final message = NotificationMessage.fromRecommendedRoute(route);
-      await registerMessage(
-        hour: message.hour,
-        minutes: message.minutes,
-        message: message.message,
-      );
+      if (!route.isEnableTimeLimit) {
+        continue;
+      }
+      final now = DateTime.now();
+      final diff = route.timeLimit!.difference(now);
+      if (diff.inMilliseconds > 0) {
+        final message = NotificationMessage.fromRecommendedRoute(route);
+        await registerMessage(
+          hour: message.hour,
+          minutes: message.minutes,
+          message: message.message,
+        );
+      }
     }
   }
 
