@@ -132,7 +132,10 @@ class _AddressState extends State<Address> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: tapRegister,
-                child: const Text('登録する'),
+                child: const Text(
+                  '登録する',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             )
           ],
