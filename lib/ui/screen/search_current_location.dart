@@ -30,7 +30,6 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   ];
 
   // 共通
-  // late String emptyErrorMessage;
   late String appBarTitle;
 
   // floatingActionButton
