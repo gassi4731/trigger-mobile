@@ -157,11 +157,6 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
         iconData: Icons.sort,
         backGroundColor: Colors.white,
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: selectedIndex,
-      //   onTap: onBottomNavigationBarTap,
-      //   items: bottomNavigationBarItems,
-      // ),
     );
   }
 }
