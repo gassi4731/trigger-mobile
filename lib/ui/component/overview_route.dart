@@ -19,6 +19,7 @@ class _OverviewRouteState extends State<OverviewRoute> {
 
   bool isShowRoute = true;
 
+  late String subtitle;
   String timeLeft = ''; // 残り時間
   String unit = ''; // 残り時間の単位
   late Color textColor; // 残り時間の表示色
@@ -98,7 +99,9 @@ class _OverviewRouteState extends State<OverviewRoute> {
       } else {
         textColor = Colors.black;
       }
+      subtitle = '出発まで';
     } else {
+      subtitle = '終電なし';
       textColor = Colors.black;
     }
     setState(() {});
@@ -138,7 +141,7 @@ class _OverviewRouteState extends State<OverviewRoute> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('出発まで'),
+                            Text(subtitle),
                             const SizedBox(height: 12),
                             Text.rich(
                               TextSpan(
