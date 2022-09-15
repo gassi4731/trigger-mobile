@@ -21,6 +21,7 @@ class _OverviewRouteState extends State<OverviewRoute> {
 
   String timeLeft = ''; // 残り時間
   String unit = ''; // 残り時間の単位
+  late Color textColor; // 残り時間の表示色
   bool isShowDepartureTime = true;
 
   final double dashedWidth = 5; // 破線単体の幅
@@ -30,14 +31,16 @@ class _OverviewRouteState extends State<OverviewRoute> {
   @override
   void initState() {
     super.initState();
+
     updateTimeLeft();
+    updateRouteStatus();
     startTimer();
   }
 
   @override
   void dispose() {
     super.dispose();
-    stopTimer();
+    timer.cancel();
   }
 
   void startTimer() {
@@ -45,14 +48,10 @@ class _OverviewRouteState extends State<OverviewRoute> {
 
     if (mounted) {
       timer = Timer.periodic(oneMin, (timer) {
-        checkShowRoute();
+        updateRouteStatus();
         updateTimeLeft();
       });
     }
-  }
-
-  void stopTimer() {
-    timer.cancel();
   }
 
   void updateTimeLeft() {
@@ -84,16 +83,25 @@ class _OverviewRouteState extends State<OverviewRoute> {
     }
   }
 
-  void checkShowRoute() {
+  void updateRouteStatus() {
     if (widget.route.isEnableTimeLimit) {
       final now = DateTime.now();
       final diff = widget.route.timeLimit!.difference(now);
       if (diff.inMilliseconds < 0) {
-        setState(() {
-          isShowRoute = false;
-        });
+        isShowRoute = false;
+      } else if (diff.inMinutes <= 5) {
+        isShowRoute = true;
+        textColor = Colors.red;
+      } else if (diff.inMinutes <= 30) {
+        isShowRoute = true;
+        textColor = Colors.blue;
+      } else {
+        textColor = Colors.black;
       }
+    } else {
+      textColor = Colors.black;
     }
+    setState(() {});
   }
 
   @override
@@ -137,17 +145,19 @@ class _OverviewRouteState extends State<OverviewRoute> {
                                 children: [
                                   TextSpan(
                                     text: timeLeft,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: FontSize.pt60,
                                       fontWeight: FontWeight.w600,
                                       height: 0.8,
+                                      color: textColor,
                                     ),
                                   ),
                                   TextSpan(
                                     text: unit,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: FontSize.pt20,
                                       fontWeight: FontWeight.w600,
+                                      color: textColor,
                                     ),
                                   ),
                                 ],
