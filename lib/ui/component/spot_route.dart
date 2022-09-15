@@ -59,7 +59,7 @@ class _SpotRouteState extends State<SpotRoute> {
         children: [
           arriveTime != null || leaveTime != null
               ? SizedBox(
-                  width: 60,
+                  width: 75,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -81,7 +81,6 @@ class _SpotRouteState extends State<SpotRoute> {
               : const SizedBox(),
           Padding(
             padding: const EdgeInsets.only(
-              left: PaddingSize.ps15,
               top: PaddingSize.ps15,
               bottom: PaddingSize.ps15,
             ),
