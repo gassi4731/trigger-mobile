@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:trigger/mock/recommended_overview_route.dart';
 import 'package:trigger/model/sort_mode.dart';
 import 'package:trigger/support_file/api.dart';
 import 'package:trigger/support_file/sort.dart';
@@ -29,24 +30,9 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     SortMode(id: 2, iconData: Icons.timer_rounded, text: '早く帰る'),
   ];
 
-  // 共通
-  late String appBarTitle;
-
   // floatingActionButton
   late Animation<double> animation;
   late AnimationController animationController;
-
-  // bottomNavigationBar
-  int selectedIndex = 0;
-  List<BottomNavigationBarItem> bottomNavigationBarItems = [
-    const BottomNavigationBarItem(icon: Icon(Icons.location_on), label: '現在地'),
-    const BottomNavigationBarItem(icon: Icon(Icons.search), label: '探す')
-  ];
-  void onBottomNavigationBarTap(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
 
   @override
   void initState() {
@@ -65,34 +51,32 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   }
 
   Future<void> fetchRecommendRoute() async {
-    late dynamic response;
+    const flavor = String.fromEnvironment('FLAVOR');
 
-    switch (selectedIndex) {
-      case 0:
+    switch (flavor) {
+      case 'prod':
         // 現在地の情報を取得
         final position = await determinePosition();
 
-        response = await http.get(
+        final response = await http.get(
           Uri.https(
             APIUrls.authority,
             APIUrls.fetchRoutes,
           ),
         );
+
+        final jsonResponses = jsonDecode(response.body) as List<dynamic>;
+        routes = jsonResponses
+            .map((dynamic e) => e as Map<dynamic, dynamic>)
+            .map(RecommendedRoute.fromJson)
+            .toList();
+        routes = sort(routes, sortModeId);
         break;
-      case 1:
-        break;
+      case 'dev':
       default:
+        routes = await mockRecommendedRoutes();
     }
 
-    final jsonResponse = jsonDecode(response.body.toString()) as List<dynamic>;
-    final jsonResponseMap =
-        jsonResponse.map((dynamic e) => e as Map<dynamic, dynamic>);
-
-    routes = [];
-    for (final i in jsonResponseMap) {
-      routes.add(RecommendedRoute.fromJson(i));
-    }
-    routes = sort(routes, sortModeId);
     setState(() {});
   }
 
@@ -100,9 +84,9 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          appBarTitle,
-          style: const TextStyle(color: Colors.white),
+        title: const Text(
+          '現在地から帰る',
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: RefreshIndicator(
@@ -113,9 +97,7 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
             return GestureDetector(
               onTap: () => Navigator.of(context).push<MaterialPageRoute>(
                 MaterialPageRoute(
-                  builder: (context) {
-                    return RouteDetail(route: routes[index]);
-                  },
+                  builder: (context) => RouteDetail(route: routes[index]),
                 ),
               ),
               child: OverviewRoute(route: routes[index]),
@@ -133,27 +115,19 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
             titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
             bubbleColor: Colors.black,
             onPress: () {
-              sortModeId = e.id;
               setState(() {
+                sortModeId = e.id;
                 routes = sort(routes, sortModeId);
               });
               animationController.reverse();
             },
           );
         }).toList(),
-
-        // animation controller
         animation: animation,
-
-        // On pressed change animation state
         onPress: () => animationController.isCompleted
             ? animationController.reverse()
             : animationController.forward(),
-
-        // Floating Action button Icon color
         iconColor: Theme.of(context).primaryColor,
-
-        // Flaoting Action button Icon
         iconData: Icons.sort,
         backGroundColor: Colors.white,
       ),
