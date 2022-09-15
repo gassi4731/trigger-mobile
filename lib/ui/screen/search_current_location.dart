@@ -19,7 +19,7 @@ class SearchCurrentLocation extends StatefulWidget {
 }
 
 class _SearchCurrentLocation extends State<SearchCurrentLocation>
-    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+    with SingleTickerProviderStateMixin {
   List<RecommendedRoute> routes = <RecommendedRoute>[];
   late int sortModeId = 2;
   final sortModes = [
@@ -35,8 +35,6 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance!.addObserver(this);
 
     fetchRecommendRoute();
 
