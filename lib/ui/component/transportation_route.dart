@@ -39,7 +39,7 @@ class _TransportationRouteState extends State<TransportationRoute> {
   void trainRoute() {
     title = widget.nextAction.train.line;
     description =
-        '${widget.nextAction.train.direction} ${widget.nextAction.train.track}';
+        '${widget.nextAction.train.direction} ${widget.nextAction.train.track}発';
     price = widget.nextAction.getPrice();
   }
 

@@ -25,9 +25,9 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   List<RecommendedRoute> routes = <RecommendedRoute>[];
   late int sortModeId = 2;
   final sortModes = [
-    SortMode(id: 0, iconData: Icons.directions_run, text: '体力を優先'),
+    SortMode(id: 0, iconData: Icons.directions_run, text: '快適さを優先'),
     SortMode(id: 1, iconData: Icons.attach_money, text: '金額が安い'),
-    SortMode(id: 2, iconData: Icons.timer_rounded, text: '早く帰る'),
+    SortMode(id: 2, iconData: Icons.timer_rounded, text: '出発時間順'),
   ];
 
   // floatingActionButton
