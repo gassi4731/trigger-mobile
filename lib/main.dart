@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
             const AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),
       ),
       home: const WelcomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
