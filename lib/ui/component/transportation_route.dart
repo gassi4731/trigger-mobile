@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trigger/model/recommended_route_next_action.dart';
-import 'package:trigger/ui/theme/font_size.dart';
-import 'package:trigger/ui/theme/padding_size.dart';
+import 'package:kitakatu/model/recommended_route_next_action.dart';
+import 'package:kitakatu/ui/theme/font_size.dart';
+import 'package:kitakatu/ui/theme/padding_size.dart';
 
 class TransportationRoute extends StatefulWidget {
   const TransportationRoute({Key? key, required this.nextAction})

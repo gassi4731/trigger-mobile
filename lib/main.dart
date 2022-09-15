@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trigger/ui/screen/search_current_location.dart';
+import 'package:kitakatu/ui/screen/search_current_location.dart';
 
 void main() {
   runApp(const MyApp());

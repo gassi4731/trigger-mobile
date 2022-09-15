@@ -1,4 +1,4 @@
-import 'package:trigger/model/recommended_route.dart';
+import 'package:kitakatu/model/recommended_route.dart';
 
 class NotificationMessage {
   NotificationMessage({

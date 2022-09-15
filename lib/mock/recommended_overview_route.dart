@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:trigger/model/recommended_route.dart';
-import 'package:trigger/model/recommended_route_detail.dart';
+import 'package:kitakatu/model/recommended_route.dart';
+import 'package:kitakatu/model/recommended_route_detail.dart';
 
 Future<List<RecommendedRoute>> mockRecommendedRoutes() async {
   final converted = <RecommendedRoute>[];

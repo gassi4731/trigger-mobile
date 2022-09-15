@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:trigger/model/sort_mode.dart';
-import 'package:trigger/support_file/api.dart';
-import 'package:trigger/support_file/sort.dart';
-import 'package:trigger/ui/component/overview_route.dart';
-import 'package:trigger/ui/screen/route_detail.dart';
+import 'package:kitakatu/model/sort_mode.dart';
+import 'package:kitakatu/support_file/api.dart';
+import 'package:kitakatu/support_file/sort.dart';
+import 'package:kitakatu/ui/component/overview_route.dart';
+import 'package:kitakatu/ui/screen/route_detail.dart';
 
 import '../../model/recommended_route.dart';
 

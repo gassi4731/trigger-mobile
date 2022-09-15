@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:trigger/model/recommended_route_detail.dart';
-import 'package:trigger/ui/theme/font_size.dart';
-import 'package:trigger/ui/theme/padding_size.dart';
+import 'package:kitakatu/model/recommended_route_detail.dart';
+import 'package:kitakatu/ui/theme/font_size.dart';
+import 'package:kitakatu/ui/theme/padding_size.dart';
 
 class SpotRoute extends StatefulWidget {
   const SpotRoute({

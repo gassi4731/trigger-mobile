@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:trigger/model/recommended_route_next_action.dart';
+import 'package:kitakatu/model/recommended_route_next_action.dart';
 
 class RecommendedRouteDetail {
   RecommendedRouteDetail({

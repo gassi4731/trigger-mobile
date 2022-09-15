@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:trigger/mock/recommended_overview_route.dart';
-import 'package:trigger/model/recommended_route.dart';
-import 'package:trigger/model/recommended_route_detail.dart';
-import 'package:trigger/ui/component/spot_route.dart';
-import 'package:trigger/ui/component/transportation_route.dart';
+import 'package:kitakatu/model/recommended_route.dart';
+import 'package:kitakatu/model/recommended_route_detail.dart';
+import 'package:kitakatu/ui/component/spot_route.dart';
+import 'package:kitakatu/ui/component/transportation_route.dart';
 
 class RouteDetail extends StatefulWidget {
   const RouteDetail({Key? key, required this.route}) : super(key: key);
