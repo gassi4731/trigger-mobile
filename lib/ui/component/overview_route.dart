@@ -90,6 +90,7 @@ class _OverviewRouteState extends State<OverviewRoute> {
       final diff = widget.route.timeLimit!.difference(now);
       if (diff.inMilliseconds < 0) {
         isShowRoute = false;
+        textColor = Colors.red;
       } else if (diff.inMinutes <= 5) {
         isShowRoute = true;
         textColor = Colors.red;
@@ -97,10 +98,12 @@ class _OverviewRouteState extends State<OverviewRoute> {
         isShowRoute = true;
         textColor = Colors.blue;
       } else {
+        isShowRoute = true;
         textColor = Colors.black;
       }
       subtitle = '出発まで';
     } else {
+      isShowRoute = true;
       subtitle = '終電なし';
       textColor = Colors.black;
     }
