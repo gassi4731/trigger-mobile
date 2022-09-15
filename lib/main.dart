@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trigger/ui/screen/welcome.dart';
+import 'package:trigger/ui/screen/search_current_location.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         appBarTheme:
             const AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),
       ),
-      home: const WelcomeScreen(),
+      home: const SearchCurrentLocation(),
       debugShowCheckedModeBanner: false,
     );
   }
