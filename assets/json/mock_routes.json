@@ -1,210 +1,416 @@
 [
   {
-    "time_limit": "2022-09-14T12:30:00+09:00",
-    "price": 1000,
-    "all_point": 90,
-    "physical_point": 60,
+    "time_limit": "2022-09-15T22:15:00.000+09:00",
+    "price": 561,
+    "all_point": 0,
+    "physical_point": 15,
     "is_use_train": true,
     "is_use_taxi": false,
     "is_use_hotel": false,
+    "details_length": 4,
+    "description": "終電で帰宅",
     "details": [
       {
+        "place_genre": "other",
         "name": "現在地",
+        "arrive_at": null,
+        "leave_at": "2022-09-15T22:15:00.000+09:00",
+        "price": 0,
+        "physical_point": 7,
         "next_action": {
           "method": "walk",
           "price": 0,
-          "required_minute": 8,
-          "train": {
-            "line": "",
-            "direction": "",
-            "track": ""
-          }
-        },
-        "arrive_at": null,
-        "leave_at": "2022-09-14T23:30:00+09:00",
-        "price": 0
+          "required_minute": 14,
+          "physical_point": 7,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
       },
       {
+        "place_genre": "station",
         "name": "渋谷駅",
+        "arrive_at": "2022-09-15T22:29:00.000+09:00",
+        "leave_at": "2022-09-15T22:29:00.000+09:00",
+        "price": 0,
+        "physical_point": 6,
         "next_action": {
           "method": "train",
-          "price": 600,
-          "required_minute": 18,
+          "price": 561,
+          "required_minute": 31,
+          "physical_point": 6,
           "train": {
-            "line": "山手線",
-            "direction": "品川・東京方面（内回り）",
-            "track": "2番線"
+            "line": "湘南新宿ライン",
+            "direction": "逗子行",
+            "track": "4番線"
           }
-        },
-        "arrive_at": "2022-09-14T23:38:00+09:00",
-        "leave_at": "2022-09-14T23:38:00+09:00",
-        "price": 0
+        }
       },
       {
-        "name": "品川駅",
-        "next_action": {
-          "method": "train",
-          "price": 400,
-          "required_minute": 0,
-          "train": {
-            "line": "横須賀線",
-            "direction": "大船行き",
-            "track": "14番線"
-          }
-        },
-        "arrive_at": "2022-09-14T23:56:00+09:00",
-        "leave_at": "2022-09-14T23:59:00+09:00",
-        "price": 0
-      },
-      {
+        "place_genre": "station",
         "name": "保土ヶ谷駅",
+        "arrive_at": "2022-09-15T23:00:00.000+09:00",
+        "leave_at": "2022-09-15T23:00:00.000+09:00",
+        "price": 0,
+        "physical_point": 2,
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 5,
+          "physical_point": 2,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "other",
+        "name": "自宅",
+        "arrive_at": "2022-09-15T23:05:00.000+09:00",
+        "leave_at": null,
+        "price": 0,
+        "physical_point": 0,
         "next_action": {
           "method": "",
           "price": 0,
           "required_minute": 0,
-          "train": {
-            "line": "",
-            "direction": "",
-            "track": ""
-          }
-        },
-        "arrive_at": "2022-09-14T23:59:00+09:00",
-        "leave_at": null,
-        "price": 0
+          "physical_point": 0,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
       }
     ]
   },
   {
-    "time_limit": "2022-09-14T23:38:00+09:00",
-    "price": 7700,
-    "all_point": 90,
-    "physical_point": 60,
-    "is_use_train": true,
-    "is_use_taxi": false,
-    "is_use_hotel": true,
+    "time_limit": null,
+    "price": 10790,
+    "all_point": 0,
+    "physical_point": 3,
+    "is_use_train": false,
+    "is_use_taxi": true,
+    "is_use_hotel": false,
+    "details_length": 2,
+    "description": "自宅までタクシー",
     "details": [
       {
+        "place_genre": "other",
+        "name": "現在地",
+        "arrive_at": null,
+        "leave_at": null,
+        "price": 0,
+        "physical_point": 3,
+        "next_action": {
+          "method": "taxi",
+          "price": 10790,
+          "required_minute": 39,
+          "physical_point": 3,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "other",
+        "name": "自宅",
+        "arrive_at": null,
+        "leave_at": null,
+        "price": 0,
+        "physical_point": 0,
+        "next_action": {
+          "method": "",
+          "price": 0,
+          "required_minute": 0,
+          "physical_point": 0,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      }
+    ]
+  },
+  {
+    "time_limit": "2022-09-15T23:59:00.000+09:00",
+    "price": 10138,
+    "all_point": 0,
+    "physical_point": 12,
+    "is_use_train": true,
+    "is_use_taxi": true,
+    "is_use_hotel": false,
+    "details_length": 4,
+    "description": "品川駅からタクシー",
+    "details": [
+      {
+        "place_genre": "other",
+        "name": "現在地",
+        "arrive_at": null,
+        "leave_at": "2022-09-15T23:59:00.000+09:00",
+        "price": 0,
+        "physical_point": 7,
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 14,
+          "physical_point": 7,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "station",
         "name": "渋谷駅",
+        "arrive_at": "2022-09-16T00:13:00.000+09:00",
+        "leave_at": "2022-09-16T00:13:00.000+09:00",
+        "price": 0,
+        "physical_point": 2,
         "next_action": {
           "method": "train",
-          "price": 600,
-          "required_minute": 0,
+          "price": 168,
+          "required_minute": 12,
+          "physical_point": 2,
           "train": {
             "line": "山手線",
             "direction": "品川・東京方面（内回り）",
             "track": "2番線"
           }
-        },
+        }
+      },
+      {
+        "place_genre": "station",
+        "name": "品川駅",
+        "arrive_at": "2022-09-16T00:25:00.000+09:00",
+        "leave_at": "2022-09-16T00:25:00.000+09:00",
+        "price": 0,
+        "physical_point": 3,
+        "next_action": {
+          "method": "taxi",
+          "price": 9970,
+          "required_minute": 36,
+          "physical_point": 3,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "other",
+        "name": "自宅",
+        "arrive_at": "2022-09-16T01:01:00.000+09:00",
+        "leave_at": null,
+        "price": 0,
+        "physical_point": 0,
+        "next_action": {
+          "method": "",
+          "price": 0,
+          "required_minute": 0,
+          "physical_point": 0,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      }
+    ]
+  },
+  {
+    "time_limit": "2022-09-15T23:59:00.000+09:00",
+    "price": 7264,
+    "all_point": 0,
+    "physical_point": 21,
+    "is_use_train": true,
+    "is_use_taxi": false,
+    "is_use_hotel": true,
+    "details_length": 7,
+    "description": "品川駅付近で宿泊",
+    "details": [
+      {
+        "place_genre": "other",
+        "name": "現在地",
         "arrive_at": null,
-        "leave_at": "2022-09-09T23:38:00+09:00",
-        "price": 0
-      },
-      {
-        "name": "品川駅",
+        "leave_at": "2022-09-15T23:59:00.000+09:00",
+        "price": 0,
+        "physical_point": 7,
         "next_action": {
           "method": "walk",
           "price": 0,
-          "required_minute": 8,
-          "train": {
-            "line": "",
-            "direction": "",
-            "track": ""
-          }
-        },
-        "arrive_at": "2022-09-14T23:56:00+09:00",
-        "leave_at": "2022-09-14T23:56:00+09:00",
-        "price": 0
+          "required_minute": 14,
+          "physical_point": 7,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
       },
       {
-        "name": "品川東武ホテル",
-        "next_action": {
-          "method": "walk",
-          "price": 0,
-          "required_minute": 8,
-          "train": {
-            "line": "",
-            "direction": "",
-            "track": ""
-          }
-        },
-        "arrive_at": "2022-09-14T00:04:00+09:00",
-        "leave_at": "2022-09-14T08:20:00+09:00",
-        "price": 6700
-      },
-      {
-        "name": "品川駅",
+        "place_genre": "station",
+        "name": "渋谷駅",
+        "arrive_at": "2022-09-16T00:13:00.000+09:00",
+        "leave_at": "2022-09-16T00:13:00.000+09:00",
+        "price": 0,
+        "physical_point": 2,
         "next_action": {
           "method": "train",
-          "price": 400,
-          "required_minute": 26,
+          "price": 168,
+          "required_minute": 12,
+          "physical_point": 2,
+          "train": {
+            "line": "山手線",
+            "direction": "品川・東京方面（内回り）",
+            "track": "2番線"
+          }
+        }
+      },
+      {
+        "place_genre": "station",
+        "name": "品川駅",
+        "arrive_at": "2022-09-16T00:25:00.000+09:00",
+        "leave_at": "2022-09-16T00:25:00.000+09:00",
+        "price": 0,
+        "physical_point": 4,
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 8,
+          "physical_point": 4,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "hotel",
+        "name": "品川東武ホテル",
+        "arrive_at": "2022-09-16T00:33:00.000+09:00",
+        "leave_at": "2022-09-16T09:19:00.000+09:00",
+        "price": 6700,
+        "physical_point": 4,
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 8,
+          "physical_point": 4,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "station",
+        "name": "品川駅",
+        "arrive_at": "2022-09-16T09:27:00.000+09:00",
+        "leave_at": "2022-09-16T09:27:00.000+09:00",
+        "price": 0,
+        "physical_point": 2,
+        "next_action": {
+          "method": "train",
+          "price": 396,
+          "required_minute": 12,
+          "physical_point": 2,
           "train": {
             "line": "横須賀線",
             "direction": "大船行き",
             "track": "15番線"
           }
-        },
-        "arrive_at": "2022-09-14T08:28:00+09:00",
-        "leave_at": "2022-09-14T08:28:00+09:00",
-        "price": 0
+        }
       },
       {
+        "place_genre": "station",
         "name": "保土ヶ谷駅",
+        "arrive_at": "2022-09-16T09:54:00.000+09:00",
+        "leave_at": "2022-09-16T09:54:00.000+09:00",
+        "price": 0,
+        "physical_point": 2,
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 5,
+          "physical_point": 2,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "other",
+        "name": "自宅",
+        "arrive_at": "2022-09-16T09:59:00.000+09:00",
+        "leave_at": null,
+        "price": 0,
+        "physical_point": 0,
         "next_action": {
           "method": "",
           "price": 0,
           "required_minute": 0,
-          "train": {
-            "line": "",
-            "direction": "",
-            "track": ""
-          }
-        },
-        "arrive_at": "2022-09-14T08:54:00+09:00",
-        "leave_at": null,
-        "price": 0
+          "physical_point": 0,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
       }
     ]
   },
   {
-    "time_limit": "",
-    "price": 15000,
-    "all_point": 90,
-    "physical_point": 10,
-    "is_use_train": false,
-    "is_use_taxi": true,
-    "is_use_hotel": false,
+    "time_limit": null,
+    "price": 9861,
+    "all_point": 0,
+    "physical_point": 14,
+    "is_use_train": true,
+    "is_use_taxi": false,
+    "is_use_hotel": true,
+    "details_length": 5,
+    "description": "渋谷駅付近で宿泊",
     "details": [
       {
+        "place_genre": "other",
         "name": "現在地",
-        "next_action": {
-          "method": "taxi",
-          "price": 15000,
-          "required_minute": 46,
-          "train": {
-            "line": "",
-            "direction": "",
-            "track": ""
-          }
-        },
         "arrive_at": null,
         "leave_at": null,
-        "price": 0
+        "price": 0,
+        "physical_point": 3,
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 7,
+          "physical_point": 3,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
       },
       {
+        "place_genre": "hotel",
+        "name": "渋谷東武ホテル",
+        "arrive_at": null,
+        "leave_at": "2022-09-16T09:18:00.000+09:00",
+        "price": 9300,
+        "physical_point": 3,
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 7,
+          "physical_point": 3,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "station",
+        "name": "渋谷駅",
+        "arrive_at": "2022-09-16T09:25:00.000+09:00",
+        "leave_at": "2022-09-16T09:25:00.000+09:00",
+        "price": 0,
+        "physical_point": 6,
+        "next_action": {
+          "method": "train",
+          "price": 561,
+          "required_minute": 32,
+          "physical_point": 6,
+          "train": {
+            "line": "湘南新宿ライン",
+            "direction": "大船行",
+            "track": "4番線"
+          }
+        }
+      },
+      {
+        "place_genre": "station",
         "name": "保土ヶ谷駅",
+        "arrive_at": "2022-09-16T09:57:00.000+09:00",
+        "leave_at": "2022-09-16T09:57:00.000+09:00",
+        "price": 0,
+        "physical_point": 2,
+        "next_action": {
+          "method": "walk",
+          "price": 0,
+          "required_minute": 5,
+          "physical_point": 2,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
+      },
+      {
+        "place_genre": "other",
+        "name": "自宅",
+        "arrive_at": "2022-09-16T10:02:00.000+09:00",
+        "leave_at": null,
+        "price": 0,
+        "physical_point": 0,
         "next_action": {
           "method": "",
           "price": 0,
           "required_minute": 0,
-          "train": {
-            "line": "",
-            "direction": "",
-            "track": ""
-          }
-        },
-        "arrive_at": null,
-        "leave_at": null,
-        "price": 0
+          "physical_point": 0,
+          "train": { "line": "", "direction": "", "track": "" }
+        }
       }
     ]
   }
