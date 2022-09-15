@@ -30,7 +30,7 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
   ];
 
   // 共通
-  late String emptyErrorMessage;
+  // late String emptyErrorMessage;
   late String appBarTitle;
 
   // floatingActionButton
@@ -47,7 +47,6 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     setState(() {
       selectedIndex = index;
     });
-    switchSearchMode();
   }
 
   @override
@@ -64,7 +63,6 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
     animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
     fetchRecommendRoute();
-    switchSearchMode();
   }
 
   Future<void> fetchRecommendRoute() async {
@@ -96,21 +94,6 @@ class _SearchCurrentLocation extends State<SearchCurrentLocation>
       routes.add(RecommendedRoute.fromJson(i));
     }
     routes = sort(routes, sortModeId);
-    setState(() {});
-  }
-
-  void switchSearchMode() {
-    switch (selectedIndex) {
-      case 0:
-        emptyErrorMessage = '下に引っ張って家に帰るルートを検索しましょう!';
-        appBarTitle = '現在地から帰る';
-        break;
-      case 1:
-        emptyErrorMessage = '今から向かう居酒屋を検索しましょう!';
-        appBarTitle = '帰る道を探す';
-        break;
-      default:
-    }
     setState(() {});
   }
 
