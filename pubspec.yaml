@@ -23,6 +23,7 @@ dependencies:
   flutter_local_notifications: ^9.9.1
   flutter_native_timezone: ^2.0.0
   flutter_app_badger: ^1.4.0
+  flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -41,3 +42,8 @@ flutter:
   assets:
     - assets/img/
     - assets/json/
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: 'assets/img/icon.png'
